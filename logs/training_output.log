@@ -1,0 +1,207 @@
+[Zola GPU] Loaded pre-trained weights from /home/arocchia/Scaricati/Zola-AI-Engine-Evolutionary-Optimizer/src/../logs/gpu_weights.pth
+Inizio Genetic GPU Training su cpu
+Popolazione: 20, Generazioni: 50
+Individui 0 e 1 inizializzati con i pesi del Bot Advanced (68 -> 130 conversion).
+
+--- Generazione 1/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 2/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 3/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.6s
+
+--- Generazione 4/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 5/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 6/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 7/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 8/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 9/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 10/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 11/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 12/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 13/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 14/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 15/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 16/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 17/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 18/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 19/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.6s
+
+--- Generazione 20/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 21/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 22/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 23/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 24/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 25/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 26/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 27/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 28/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 29/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 30/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 31/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 32/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 33/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 34/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 35/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 36/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 37/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 38/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 39/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 40/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 41/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 42/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 43/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 44/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 45/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 46/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 47/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 48/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 49/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+--- Generazione 50/50 ---
+Miglior Punteggio: 8.0 (Media: 8.0)
+Generazione completata in 0.5s
+
+Training Completato! Migliori pesi salvati in 'logs/gpu_weights.pth'
+

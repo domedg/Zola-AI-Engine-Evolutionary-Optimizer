@@ -1,0 +1,24 @@
+The competition will be based on the Zola game, please find in this folder rules and the basic implementation (it is in the material in the General channel).
+
+For the competition, we will use a 8x8 board for the game.
+
+A team comprises at most 3 people.
+
+The submission deadline is May 14, 2026; the competition will take place on May 15, 2026.
+
+A match consists of four games, with players alternating who starts.
+
+The file must contain a function of the form playerStrategy (game,state), where
+
+game is the Zola game,
+
+state is a board state,
+
+the function returns a move, that is, a tuple of the form 
+((row,column), pip, captured)
+where the first element identifies the selected cell, pip is the number assigned to the cell, and captured is a tuple containing the cell that have been captured (or the empty tuple, if no capture occurred)
+
+
+As explained during the lesson, each player must provide the chosen move within 3 seconds.
+
+If something goes wrong, or the required move is not received within the prescribed timeout, a random move will be automatically chosen by the main program.

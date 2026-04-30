@@ -1,0 +1,18 @@
+# Ignore Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Ignore trained weights and logs to maintain competitive integrity!
+logs/best_weights.json
+logs/training_state.json
+logs/training_log.txt
+
+# Virtual environments
+venv/
+env/
+.env
+
+# IDEs
+.vscode/
+.idea/

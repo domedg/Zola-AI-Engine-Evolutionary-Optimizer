@@ -1,0 +1,3349 @@
+Corso di Laurea Magistrale in Ingegneria Informatica
+Appunti di Intelligenza Artiﬁciale
+Eugenio Costantino
+Anno Accademico 2022/2023
+Indice
+1
+Intelligenza Artiﬁciale
+1
+1.1
+Agenti Razionali
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2
+2
+Ricerca
+4
+2.1
+General Tree Search
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+5
+2.2
+Strategie di Ricerca Non Informata . . . . . . . . . . . . . . . . . . . . . .
+6
+2.2.1
+Ricerca Best-First
+. . . . . . . . . . . . . . . . . . . . . . . . . . . .
+6
+2.2.2
+Ricerca in Ampiezza . . . . . . . . . . . . . . . . . . . . . . . . . . .
+7
+2.2.3
+Ricerca in Profondit`a
+. . . . . . . . . . . . . . . . . . . . . . . . . .
+7
+2.2.4
+Iterative Deepening
+. . . . . . . . . . . . . . . . . . . . . . . . . . .
+8
+2.2.5
+Bidirectional Best-First
+. . . . . . . . . . . . . . . . . . . . . . . . .
+9
+2.2.6
+Uniform Cost Search . . . . . . . . . . . . . . . . . . . . . . . . . . .
+9
+2.3
+Strategie di Ricerca Informata o Euristica . . . . . . . . . . . . . . . . . .
+10
+2.3.1
+Greedy Best-First Search
+. . . . . . . . . . . . . . . . . . . . . . . .
+10
+2.3.2
+A→Tree Search . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+11
+2.3.3
+Propriet`a delle Euristiche . . . . . . . . . . . . . . . . . . . . . . . .
+11
+2.3.3.1
+Ammissibilit`a
+. . . . . . . . . . . . . . . . . . . . . . . . .
+11
+2.3.3.2
+Consistenza . . . . . . . . . . . . . . . . . . . . . . . . . . .
+11
+2.3.4
+Completezza di A→Tree Search . . . . . . . . . . . . . . . . . . . . .
+11
+2.3.5
+Ottimalit`a di A→Tree Search . . . . . . . . . . . . . . . . . . . . . .
+12
+2.3.6
+A→Graph Search . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+12
+2.3.7
+Ottimalit`a di A→Graph Search . . . . . . . . . . . . . . . . . . . . .
+13
+2.3.8
+Teorema sulla Consistenza e sull’Ammissibilit`a delle Euristiche . . .
+14
+2.3.9
+Weighted A→Search . . . . . . . . . . . . . . . . . . . . . . . . . . .
+15
+2.3.10 Recursive Best-First Search . . . . . . . . . . . . . . . . . . . . . . .
+15
+2.3.11 Alcune considerazioni sulle Euristiche
+. . . . . . . . . . . . . . . . .
+15
+3
+Ricerca in Ambienti Complessi
+16
+3.1
+Ricerca Hill Climbing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+16
+I
+INDICE
+3.2
+Simulated Annealing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+17
+3.3
+Ricerca con Azioni non Deterministiche
+. . . . . . . . . . . . . . . . . . .
+17
+3.4
+Ricerca AND-OR . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+18
+3.5
+Ricerca con Osservazioni Parziali . . . . . . . . . . . . . . . . . . . . . . .
+19
+4
+Ricerca con Avversari e Giochi
+20
+4.1
+Giochi a Somma Zero
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+21
+4.2
+Ricerca MiniMax . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+21
+4.3
+Alpha-Beta Pruning
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+23
+4.4
+Heuristic Alpha-Beta . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+24
+4.5
+Monte Carlo Tree Search . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+25
+4.6
+Esempio - Pacman Veloce . . . . . . . . . . . . . . . . . . . . . . . . . . .
+26
+5
+Incertezza e Utilit`a
+27
+5.1
+Utilit`a . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+30
+6
+Constraint Satisfaction Problems
+33
+6.1
+Constraint Graph e Hypergraph . . . . . . . . . . . . . . . . . . . . . . . .
+35
+6.2
+Problema dell’Omomorﬁsmo . . . . . . . . . . . . . . . . . . . . . . . . . .
+36
+6.3
+Backtracking Search
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+39
+6.4
+K-Consistency . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+40
+6.5
+Strutture dei Problemi . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+41
+6.6
+Strutture quasi ad Albero di CSP . . . . . . . . . . . . . . . . . . . . . . .
+45
+6.7
+Introduzione alla Tree Decomposition . . . . . . . . . . . . . . . . . . . . .
+46
+6.8
+Join-Tree
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+46
+6.9
+IpergraﬁAciclici
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+47
+6.10
+Tree Decomposition . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+47
+6.10.1 Teorema . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+47
+6.11
+Altre Considerazioni sulla Tree Decomposition . . . . . . . . . . . . . . . .
+48
+6.12
+Teorema di Grohe . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+51
+6.12.1 Enunciato del Teorema
+. . . . . . . . . . . . . . . . . . . . . . . . .
+51
+6.12.1.1 Dimostrazione →
+. . . . . . . . . . . . . . . . . . . . . . .
+51
+7
+Planning
+53
+7.1
+Classical Planning
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+55
+7.2
+Classical Representation . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+56
+7.3
+State-Space Planning . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+59
+7.3.1
+Forward Search . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+59
+7.3.2
+Backward Search . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+60
+7.3.3
+Lifting . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+61
+7.3.4
+STRIPS . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+62
+7.4
+Tecniche Planning-Graph
+. . . . . . . . . . . . . . . . . . . . . . . . . . .
+62
+8
+Teoria dei Giochi
+65
+II
+INDICE
+8.1
+Giochi Coalizionali . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+66
+8.1.1
+Caratteristiche dei Giochi Coalizionali . . . . . . . . . . . . . . . . .
+68
+8.1.2
+Esempio 1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+69
+8.1.3
+Core di un Gioco Coalizionale . . . . . . . . . . . . . . . . . . . . . .
+69
+8.1.4
+Shapley Value . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+70
+8.1.5
+Insoddisfazione e Nucleolo . . . . . . . . . . . . . . . . . . . . . . . .
+71
+8.1.6
+Un Problema dal Talmud e la Contested Garmant Rule . . . . . . .
+74
+8.2
+Aste e Mechanism Design
+. . . . . . . . . . . . . . . . . . . . . . . . . . .
+76
+8.2.1
+Sealed-Bid Auctions . . . . . . . . . . . . . . . . . . . . . . . . . . .
+76
+8.2.2
+Second-Price Auctions . . . . . . . . . . . . . . . . . . . . . . . . . .
+77
+8.2.3
+First-Price Auctions . . . . . . . . . . . . . . . . . . . . . . . . . . .
+78
+8.3
+Giochi Strategici
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+79
+8.3.1
+Equilibrio di Nash . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+80
+8.3.2
+Strategie Miste . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+81
+8.3.3
+Esempio di Equilibrio di Nash Misto . . . . . . . . . . . . . . . . . .
+84
+8.4
+Giochi in Forma Estesa . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+85
+9
+Answer Set Programming
+87
+9.1
+Datalog
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+88
+9.2
+Semantica . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+89
+9.3
+Answer Set
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+90
+9.4
+Disjunctive Logic Programming . . . . . . . . . . . . . . . . . . . . . . . .
+93
+9.5
+Semantica per la Disjunctive Logic Programming . . . . . . . . . . . . . .
+95
+9.5.1
+Alcuni Teoremi per la DLP . . . . . . . . . . . . . . . . . . . . . . .
+96
+9.6
+Path Hamiltoniano - Esercizio . . . . . . . . . . . . . . . . . . . . . . . . .
+97
+9.7
+Aggregate Function . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+97
+III
+Capitolo 1
+Intelligenza Artiﬁciale
+Non esiste una deﬁnizione univoca di Intelligenza Artiﬁciale: si potrebbe deﬁnire in termini
+di fedelt`a alla prestazione umana oppure si potrebbe deﬁnirla in maniera formale come
+razionalit`a ma, allo stesso tempo, anche l’intelligenza non ha una deﬁnizione univoca. L’IA
+si potrebbe intendere sia come una propriet`a del comportamento che del pensiero e del
+ragionamento.
+Per quanto detto, si delineano quattro di!erenti approcci nell’interpretare l’IA:
+Agire umanamente;
+Pensare umanamente;
+Pensare razionalmente;
+Agire razionalmente.
+Se consideriamo l’approccio dell’agire umanamente, potremmo pensare che una intel-
+ligenza artiﬁciale possa superare il test di Touring: sostanzialmente, un esaminatore
+umano pone sotto forma di domande scritte alcuni quesiti a cui l’IA dovr`a rispondere... se
+l’esaminatore non riuscisse a capire che le risposte non provengono da una persona, l’IA
+supererebbe il test.
+Per superare il test, l’IA dovrebbe avere la capacit`a di interpretare il linguaggio naturale
+per poter comunicare, di rappresentare la conoscenza in modo da memorizzare ci`o che
+vede e sente, di ragionare automaticamente e di apprendere in maniera automatica... do-
+vrebbe disporre anche di visione artiﬁciale e riconoscimento vocale per percepire il mondo
+e necessiterebbe della robotica per spostare/manipolare gli oggetti e muoversi.
+Dunque, in funzione delle suddette capacit`a, `e possibile deﬁnire varie branche dell’IA:
+Natural Language Processing;
+Knowledge Representation;
+Automatic Reasoning;
+Machine Learning;
+Computer Vision;
+Robotics.
+1
+INTELLIGENZA ARTIFICIALE
+L’approccio del Pensare razionalmente, mediante la logica in condizioni di certezza e
+mediante la probabilit`a in condizioni di incertezza, permette di costruire un modello del
+pensiero razionale che tuttavia non genera un comportamento intelligente.
+L’approccio dell’Agire razionalmente ingloba l’approccio precedente e risolve il suo
+problema lavorando con degli agenti che puntano ad ottenere il miglior risultato possibile,
+in condizioni di certezza, o il miglior risultato atteso, in condizioni di incertezza.
+In ogni caso, per risolvere problemi di intelligenza artiﬁciale, `e necessario modellare il
+problema per poi:
+Fare inferenza: ovvero deduzione... a partire da alcune ipotesi si generano delle
+conclusioni;
+Fare learning: ovvero induzione...
+a partire dall’osservazione di alcuni fatti si
+generano delle conclusioni.
+1.1
+Agenti Razionali
+Un agente `e qualsiasi cosa possa essere vista come un sistema che percepisce il suo
+ambiente attraverso dei sensori e agisce su di esso mediante degli attuatori.
+Sostanzialmente, esistono due macro-categorie di agenti:
+Agenti di tipo riﬂessivo: sono basati su dei riﬂessi. I sensori gli restituiscono come
+`e il mondo ed essi compiono delle azioni senza preoccuparsi delle future conseguenze
+(non pianiﬁcano). Potrebbero avere un modello o uno stato del mondo corrente;
+Agenti pianiﬁcatori: pianiﬁcano e si preoccupano di come sarebbe il mondo in
+seguito alle loro azioni. Devono avere un modello di come evolve il mondo in seguito
+alle loro azioni, dunque utilizzano una strategia per ottimizzare i loro obiettivi.
+Si possono classiﬁcare gli agenti mediante PEAS(performance measure, environment, ac-
+tuators, sensors).
+Consideriamo un esempio:
+2
+INTELLIGENZA ARTIFICIALE
+Il nostro studio sar`a rivolto principalmente agli agenti pianiﬁcatori. La modellazione dello
+stato del mondo in cui opera l’agente di!erisce a seconda degli obiettivi.
+Lo stato pu`o essere:
+Semplice: vi `e una modellazione atomica;
+Vettoriale: lo stato `e un’aggregazione di pi`u cose;
+Strutturato: gli stati sono pi`u complessi, possono avere dei sotto-problemi al loro
+interno.
+3
+Capitolo 2
+Ricerca
+Un problema di ricerca consiste di:
+Uno spazio degli stati;
+Una funzione di successione: che deﬁnisce le azioni e i relativi costi.
+Uno stato iniziale;
+Un goal: una funzione (test) che valuta il successo della ricerca,
+Una soluzione `e una sequenza di azioni, ovvero una pianiﬁcazione che trasforma lo stato
+iniziale in uno dei possibili stati che soddisfano il goal.
+Per generare una soluzione `e
+necessario e!ettuare una ricerca.
+Risulta necessario precisare una importante di!erenza: un search state mantiene sola-
+mente i dettagli del mondo utili alla pianiﬁcazione mentre un world state mantiene ogni
+dettaglio dello stato del mondo.
+Ora, siccome `e necessario e!ettuare una ricerca, bisogna deﬁnire una rappresentazione.
+Potremmo usare uno state space graph dove i nodi sono degli stati e ogni stato occorre
+solo una volta, mentre gli archi rappresentano le applicazioni della funzione di successio-
+ne. Tuttavia, siccome il numero di world states potrebbe essere altissimo, generare l’intero
+grafo non `e praticabile. . . possiamo generare solo i pezzi pi`u promettenti.
+4
+RICERCA
+Possiamo utilizzare un search tree che ha come radice lo stato iniziale e come ﬁgli i
+possibili successori dello stato padre, mentre i rami rappresentano le azioni. Si noti che ogni
+nodo (search state) corrisponde a un world state ma allo stesso tempo rappresenta anche
+il cammino che dallo stato iniziale permette di raggiungere quel particolare world state.
+Infatti, in un search tree potrebbero esserci pi`u cammini (search states) per raggiungere
+uno stesso world state.
+Dunque, piuttosto che costruire l’intero grafo, a partire dallo stato iniziale generiamo
+solamente gli stati successivi mediante la funzione di successione. Si noti che, in realt`a,
+gli alberi di ricerca per come li abbiamo deﬁniti sono dei graﬁche vengono esplorati e
+visualizzati come degli alberi. Dunque, se non memorizzo i nodi gi`a visitati (se lo spazio
+di ricerca `e molto grande non posso farlo) rischio di avere dei loop come nel seguente caso:
+Possiamo notare come il search tree, a partire dal nodo S di questo 4-state graph, ha
+inﬁniti nodi.
+2.1
+General Tree Search
+A partire dal search state in cui ci troviamo, lo espandiamo, ovvero inseriamo tutti i
+possibili successori in un insieme chiamato frontiera, selezioniamo un nodo della frontiera
+in base ad una strategia e se tale nodo non soddisfa il gol allora la ricerca ha successo,
+altrimenti lo espandiamo. Naturalmente, se non ci sono pi`u nodi da espandere, ovvero la
+frontiera `e vuota, la ricerca fallisce.
+5
+RICERCA
+A seconda della strategia utilizzata nello scegliere i nodi presenti nella frontiera, si otten-
+gono di!erenti tipi di ricerche. In ogni caso, si cerca di espandere il minor numero di nodi.
+La frontiera pu`o essere di tre tipi:
+Coda di priorit`a: dove la priorit`a `e basata sulla funzione di costo (best-ﬁrst);
+Coda FIFO: viene estratto il primo nodo della coda (ricerca in ampiezza);
+Coda LIFO: detta anche stack, viene estratto l’ultimo modo della coda (ricerca in
+profondit`a).
+2.2
+Strategie di Ricerca Non Informata
+Un algoritmo di ricerca non informata non riceve alcuna informazione su quanto uno
+stato sia vicino all’obiettivo.
+In ogni caso, possiamo valutare le prestazioni di un al-
+goritmo basandoci sulla completezza (se esiste una soluzione, l’algoritmo la trova),
+sull’ottimalit`a (trovare la soluzione di costo minimo) e sulla complessit`a temporale e
+spaziale.
+2.2.1
+Ricerca Best-First
+Sia f(n) il costo del nodo n. La frontiera `e una coda con priorit`a. Ad ogni interazione,
+scegliamo il nodo n tra i nodi della frontiera che presenta f(n) minimo... se il suo sta-
+to `e uno stato obiettivo lo restituiamo, altrimenti lo espandiamo per generare nodi ﬁgli.
+Ciascun nodo ﬁglio viene aggiunto alla frontiera se non `e mai stato raggiunto in prece-
+denza oppure se viene raggiunto con un cammino di costo minore rispetto ai precedenti.
+Utilizzando di!erenti f(n) otteniamo di!erenti algoritmi.
+6
+RICERCA
+2.2.2
+Ricerca in Ampiezza
+Quando tutte le azioni hanno lo stesso costo, `e utile utilizzare la ricerca in ampiezza,
+dove espando prima la radice, poi tutti i suoi successori, poi tutti i loro successori etc. Si
+potrebbe implementare come una ricerca best-ﬁrst dove f(n) `e pari alla profondit`a del
+nodo, ovvero il numero di azioni necessarie per raggiungerlo. Una implementazione pi`u
+e”ciente consiste nell’utilizzare una coda FIFO piuttosto che una coda con priorit`a.
+Essendo una ricerca sistematica, `e completa anche su spazi degli stati inﬁniti. Pi`u preci-
+samente, quando genera nodi di profondit`a d ha gi`a generato tutti i nodi di profondit`a
+d →1, dunque se uno di essi fosse stato una soluzione, l’algoritmo lo avrebbe trovato.
+Se le azioni avessero anche lo stesso costo, l’algoritmo sarebbe anche ottimale (non vale
+il viceversa). Se d `e la profondit`a mentre b `e il numero di successori di ogni nodo, la
+complessit`a spaziale e temporale sarebbe pari a O(bd), ovvero 1 + b + b2 + b3 + ....
+2.2.3
+Ricerca in Profondit`a
+Viene sempre espanso per primo il nodo della frontiera che possiede una maggiore profon-
+dit`a, e cos`ı via. Si pu`o implementare come una ricerca best-ﬁrst dove f(n) `e pari all’op-
+posto (< 0) della profondit`a. Una implementazione pi`u e”ciente consiste nell’utilizzare
+una coda LIFO piuttosto che una con priorit`a. Generalmente non vengono memorizzati i
+nodi visitati.
+7
+RICERCA
+Se la struttura `e aciclica, allora l’algoritmo `e completo (sebbene si possa visitare pi`u
+volte uno stesso nodo se esistono pi`u cammini) e non `e ottimale poich´e restituisce sempre
+la prima soluzione che trova anche se non `e la meno costosa. Sia b il branching factor
+(numero di ﬁgli) e m la massima profondit`a dell’albero, se la struttura `e aciclica e ﬁnita
+allora la complessit`a spaziale `e O(b · m) mentre quella temporale `e O(bm). Sebbene non
+dia garanzie di completezza e ottimalit`a, `e utile poich´e utilizza poca memoria. Si noti che,
+qualora la struttura fosse ciclica e non si tenesse traccia dei nodi gi`a visitati, l’algoritmo
+potrebbe perdersi in dei loop.
+2.2.4
+Iterative Deepening
+Risolve il problema della ricerca in profondit`a evitando che essa si perdi in cammini inﬁniti.
+Si ﬁssa un livello di profondit`a l e si e!ettua una DFS dove i nodi a profondit`a l vengono
+considerati senza successori. Se la ricerca fallisce si ﬁssa un livello di profondit`a l + 1 e si
+e!ettua una DFS, e cos`ı via.
+Non possiamo evitare di visitare un nodo gi`a visitato mediante un altro cammino, tuttavia
+questa strategia permette di evitare cicli inﬁniti aumentando la complessit`a temporale.
+Dunque, l’algoritmo garantisce completezza scegliendo opportunamente l e non `e ottimale.
+Ha una complessit`a spaziale pari a O(b · d) dove b `e il branching factor e d `e la profondit`a
+della soluzione. Qualora non vi fosse una soluzione, il costo temporale e spaziale sarebbe
+identico a quello della ricerca in profondit`a.`u
+8
+RICERCA
+2.2.5
+Bidirectional Best-First
+E’ una ricerca che procede simultaneamente in avanti (a partire dallo stato iniziale) e
+all’indietro (a partire dagli stati obiettivo) utilizzando una strategia best-ﬁrst. Bisogna
+gestire due frontiere e due tabelle degli stati raggiunti. Viene trovata una soluzione se
+le due frontiere collidono. Qualora vi fossero pi`u stati obiettivi, essi vengono tutti inse-
+riti (all’inizio) nella frontiera del problema capovolto e nella relativa tabella degli stati
+raggiunti.
+Se lo spazio degli stati ha una soluzione oppure `e ﬁnito, tale algoritmo garantisce cor-
+rettezza e ottimalit`a a seconda della strategia utilizzata. Sia b il branching factor e d la
+profondit`a della soluzione, la complessit`a spaziale e temporale `e pari a O(b
+d
+2 ).
+2.2.6
+Uniform Cost Search
+Se le azioni avessero tutte le stesso costo, risulta utile utilizzare questa particolare ricer-
+ca best-ﬁrst dove f(n) `e pari al costo del cammino. Si noti che se non vi sono costi,
+l’algoritmo degenera in una ricerca BFS. E’ noto anche come algoritmo di Dijkstra. Na-
+turalmente, la frontiera `e una coda di priorit`a. Si noti che l’algoritmo controlla se `e stato
+9
+RICERCA
+raggiunto l’obiettivo solamente quando espande un nodo poich´e, se lo facesse quando lo
+genera, potrebbe ignorare un cammino migliore.
+Assumendo che la miglior soluzione abbia un costo ﬁnito e non nullo, allora l’algoritmo
+`e completo ed `e anche ottimo (vedi dimostrazione dell’ottimalit`a della ricerca A→). Sia
+C→il costo della soluzione e sia ω il costo minimo degli archi, allora la profondit`a della
+soluzione sar`a C→
+ω . La complessit`a spaziale e temporale `e pari a b
+C→
+ω , dove b `e il fattore
+di branching factor.
+2.3
+Strategie di Ricerca Informata o Euristica
+Queste strategie utilizzano dei suggerimenti circa la vicinanza all’obiettivo.
+Si utilizza una di!erente funzione di costo
+f(n) = g(n) + h(n)
+(2.1)
+dove
+g(n) `e il costo del cammino dal nodo iniziale al nodo n... `e una funzione che
+guarda al passato;
+h(n) `e l’euristica, il costo stimato del cammino dallo stato del nodo n al
+goal... `e una funzione che guarda al futuro.
+Naturalmente, introducendo le euristiche stiamo ”eliminando” alcuni vincoli del problema
+originario, che diventa un problema rilassato (teoricamente peggiore dal punto di vista
+della bont`a della soluzione ma migliore come tempo per raggiungere il goal... vi `e un
+trade-o!).
+Si noti che, qualora non stessimo utilizzando alcuna euristica, allora si avrebbe che
+f(n) = g(n), ovvero l’algoritmo degenererebbe in una uniform cost search.
+2.3.1
+Greedy Best-First Search
+Utilizza come funzione di costo f(n) = h(n), dunque si basa unicamente sull’euristica
+con una strategia best-ﬁrst. Ad ogni passo si cerca sempre di arrivare il pi`u possibile
+vicino ad un obiettivo e, quindi, tale approccio potrebbe portare a risultati peggiori di
+quelli ottenibili procedendo con maggior cautela.
+Non `e garantita l’ottimalit`a ma tale ricerca `e completa negli spazi ﬁniti (ma non in quelli
+inﬁniti) anche se la struttura `e ciclica. La complessit`a spaziale e temporale `e O(|v|) dove
+|v| `e il numero di nodi del grafo, sebbene utilizzando opportune euristiche si possa ridurre
+10
+RICERCA
+la complessit`a ﬁno a O(b · m), dove b il branching factor e m `e la massima profondit`a
+dell’albero.
+2.3.2
+A→Tree Search
+E’ il pi`u di!uso algoritmo di ricerca informata, dove la funzione di valutazione `e
+f(n) = g(n) + h(n) ed utilizza una strategia best-ﬁrst. Combina la UCS e la Greedy
+Search.
+Si noti che, come nella UCS, l’algoritmo veriﬁca che un nodo soddisﬁil goal solamente
+dopo averlo espanso e non dopo averlo generato, poich´e potrebbero esistere dei cammini
+con costo minore.
+2.3.3
+Propriet`a delle Euristiche
+Vi sono due principali propriet`a.
+2.3.3.1
+Ammissibilit`a
+Una euristica h(n) `e ammissibile se non sovrastima mai il costo per raggiungere un obiet-
+tivo. Pi`u formalmente, indicando con h→(n) il costo del cammino ottimo da n ﬁno al pi`u
+vicino obiettivo,
+se ↑n si ha che h(n) ↓h→(n) e h(goal) = 0, allora h(n) `e ammissibile.
+(2.2)
+2.3.3.2
+Consistenza
+Una euristica h(n) `e consistente se ↑n e suo successore n↑generato da una azione a,
+deﬁnendocost(n, a, n↑) = g(n↑) →g(n), si ha che
+h(n) ↓cost(n, a, n↑) + h(n↑)
+(2.3)
+Si noti che ogni euristica consistente `e anche ammissibile (non vale il viceversa).
+2.3.4
+Completezza di A→Tree Search
+Supponendo che lo spazio degli stati abbia una soluzione o sia ﬁnito e che tutte le azioni
+siano positive (maggiori di una soglia ω), allora la ricerca A→`e completa.
+11
+RICERCA
+2.3.5
+Ottimalit`a di A→Tree Search
+Supponendo che l’euristica utilizzata sia ammissibile, allora la ricerca A→`e ottima rispetto
+al costo. Come possiamo dimostrarlo?
+Supponiamo di disporre di un albero dove A `e il nodo ottimo e B `e un nodo obiettivo
+(non ottimo). Si ha che:
+f(A) = g(A) + h(A)
+<
+f(B) = g(B) + h(B)
+(2.4)
+Ora, consideriamo un nodo antenato di A, ovvero n, che era nella frontiera quando anche
+B era nella frontiera. Bisogna dimostrare che n (che si trova sul cammino ottimo) venga
+sempre estratto prima di B.
+Anzitutto, si ha che f(n) < f(A) per deﬁnizione, dove:
+f(n) = g→(n) + h(n)
+(2.5)
+Siccome h(n) `e una euristica ammissibile, si ha che:
+↑n,
+h(n) ↓h→(n)
+(2.6)
+Ovvero, `e un lower bound.
+Di conseguenza otteniamo che:
+f(n) = g→(n) + h(n)
+↓
+g→(n) + h→(n) = f(A)
+(2.7)
+Ma siccome A `e ottimo, allora f(A) < f(B), quindi:
+f(n) ↓f(A) < f(B)
+(2.8)
+Quindi n viene sempre estratto prima di B... espandendolo, inseriamo i suoi ﬁgli nella
+frontiera. Tra questi ﬁgli vi sar`a un n↑per il quale vale lo stesso discorso.
+In conclusione, tutti gli antenati di A, con A compreso, verranno sempre estratti prima
+di B.
+2.3.6
+A→Graph Search
+In una Tree Search si possono generare gli stessi stati pi`a volte (vi sono di!erenti nodi-
+percorsi) e, dunque, li si esplora pi`u volte, peggiorando le prestazioni ma migliorando la
+memoria occupata (visto che non vengono memorizzati gli stati visitati).
+La Graph Search memorizza gli stati visitati all’interno di un set e prima di espandere un
+nodo veriﬁca che il relativo stato non sia presente nel suddetto set. Sorge un problema:
+12
+RICERCA
+potrebbe esistere (e non essere considerato) un nodo il cui stato `e gi`a stato visitato che,
+tuttavia, presenta un cammino meno costoso. In questo caso `e necessario che l’euristica,
+oltre che ad essere ammissibile, sia anche consistente.
+Infatti, se consideriamo una coppia di nodi (a, b) in un certo cammino, si ha che:
+h(a) ↓g(b) →g(a) + h(b)
+dalla consistenza, quindi
+(2.9)
+h(a) + g(a) ↓g(b) + h(b)
+ovvero
+(2.10)
+f(a) ↓f(b)
+(2.11)
+Utilizzando questo risultato possiamo dimostrare l’ottimalit`a di A→Graph Search.
+2.3.7
+Ottimalit`a di A→Graph Search
+Supponiamo che i nodi n (sul cammino ottimo) e n↑(sul cammino non ottimo) si rife-
+riscano allo stesso stato. Supponiamo che l’euristica h(n) sia ammissibile e consistente.
+Supponiamo per assurdo che n↑sia estratto prima di n e che stato(n↑) = stato(n)
+venga inserito nei closed states. Supponiamo che p sia l’antenato (non necessariamente
+padre) di n che era nella frontiera quando `e stato scelto n↑.
+Dalla consistenza sappiamo che:
+f(p) ↓f(n)
+(2.12)
+Si noti una cosa: possiamo dire che
+f(n) = g→(n) + h(n)
+(2.13)
+Inoltre, siccome n, n↑si riferiscono allo stesso stato, vale che
+h(n) = h(n↑)
+(2.14)
+Quindi, possiamo dire che:
+f(p) ↓f(n) < f(n↑)
+(2.15)
+Abbiamo ottenuto che il nodo p doveva essere scelto prima di n↑e che, espandendolo, si
+generano i nodi ﬁgli p↑(sempre antenati di n) che dovevano essere scelti prima di n↑e
+cos`ı via, ﬁno ad arrivare ad n. Questa dimostrazione, combinata alla precedente per il
+seguente teorema, dimostra l’ottimalit`a.
+13
+RICERCA
+2.3.8
+Teorema sulla Consistenza e sull’Ammissibilit`a delle Euristiche
+Se una euristica h(n) `e consistente, allora `e anche ammissibile.
+Come lo possiamo
+dimostrare? Lo si fa per induzione.
+Consideriamo il caso base (n = 1, ovvero lo stato n dista 1 dal goal).
+Per la consistenza, si ha che:
+↑azione,
+h(n) ↓costo(n, a, goal) + h(goal)
+(2.16)
+Quindi, siccome h(goal) = 0
+h(n) ↓costo(n, a, goal)
+(2.17)
+In particolare, per la migliore azione a→avr`o che:
+h(n) ↓costo(n, a→, goal) = h→(n)
+(2.18)
+Ovvero, otteniamo l’ammissibilit`a:
+h(n) ↓h→(n)
+(2.19)
+Dunque, abbiamo dimostrato il caso base.
+Supponiamo che tale teorema valga per tutti gli stati n→a distanza k dal goal. Sia n
+uno stato a distanza k + 1 dal goal e che dista 1 da n↑(ovvero n `e padre di n↑). Per la
+consistenza si ha che:
+↑a,
+h(n) ↓costo(n, a, n↑) + h(n↑)
+(2.20)
+Siano a→e n↑→la miglior azione e il miglior nodo... la relazione continua a valere.
+h(n) ↓costo(n, a→, n↑→) + h(n↑→)
+(2.21)
+Siccome, per ipotesi di induzione, si ha che, per tutti i nodi che distano k dal goal, la
+consistenza implica ammissibilit`a, otteniamo che, per l’ipotesi di ammissibilit`a:
+h(n↑→) ↓h→(n↑→)
+(2.22)
+Quindi
+h(n) ↓costo(n, a→, n↑→) + h→(n↑→) = h→(n)
+(2.23)
+Riassumendo, abbiamo ottenuto che:
+h(n) ↓h→(n)
+(2.24)
+Dunque, abbiamo dimostrato che la consistenza implica l’ammissibilit`a.
+14
+RICERCA
+2.3.9
+Weighted A→Search
+La ricerca A→ha buone qualit`a tuttavia espande una grande quantit`a di nodi. E’ possibile
+esplorare meno nodi (riducendo tempo e spazio occupato) se accettiamo soluzioni sub-
+ottime ma abbastanza buone, ovvero soluzioni soddisfacenti. In sostanza, utilizziamo anche
+euristiche inammissibili (che potrebbero sovrastimare) che potrebbero non individuare
+l’ottimo, avendo tuttavia una euristica pi`u accurata, che permetta di ridurre il numero di
+nodi espansi.
+Nella Weighted A→Search si ha che:
+f(n) = g(n) + w · h(n)
+con w ↔(1, ↗)
+(2.25)
+Si pu`o intendere come una generalizzazione delle altre ricerche (se w = 0 otteniamo la
+UCS, se w = 1 otteniamo la A→, se w ↘↗otteniamo la greedy). In generale, rendiamo
+la ricerca A→pi`u golosa facendo aumentare ”l’importanza” dell’euristica, senza ignorare
+completamente il costo del cammino.
+2.3.10
+Recursive Best-First Search
+E’ una alternativa alla ricerca A→che riduce l’ampio numero di nodi memorizzati (frontie-
+ra). Imita il funzionamento di una ricerca best-ﬁrst e somiglia ad una DFS, tuttavia tiene
+traccia del valore f del miglior cammino alternativo che parte da un qualsiasi antenato del
+nodo corrente. Se il nodo corrente supera valore limite (ovvero tutti i suoi ﬁgli hanno un
+maggior valore), la ricorsione torna indietro al cammino alternativo e, durante il ritorno,
+sostituisce il valore f di ogni nodo con il miglior valore f dei suoi ﬁgli. La pecca di questa
+ricerca `e che vi `e una forte rigenerazione dei nodi.
+2.3.11
+Alcune considerazioni sulle Euristiche
+E’ necessario utilizzare delle euristiche forniscano una valutazione quantitativa (numerica)
+e non semplicemente qualitativa. Infatti, in caso contrario, sebbene possiamo decidere
+quali stati sono preferibili rispetto ad altri con strategie di ricerca best-ﬁrst (il confronto
+qualitativo `e su”ciente), non potremmo deciderlo utilizzando strategie come la ricerca
+A→: questo genere di strategie combina pi`u criteri e, qualora questi non fornissero una
+stima quantitativa, non li si potrebbe combinare e, quindi, quantiﬁcare quanto uno stato
+sia preferibile rispetto ad un altro.
+15
+Capitolo 3
+Ricerca in Ambienti Complessi
+Le precedenti strategie di ricerca si focalizzavano nel trovare cammini attraverso lo spazio
+degli stati.
+Altre volte siamo interessati solamente allo stato ﬁnale e non al cammino
+percorso per raggiungerlo (ad esempio nel problema delle n regine ci interessa solamente
+trovare una conﬁgurazione valida).
+In sostanza, in precedenza la nostra soluzione era una sequenza di azioni mentre ora
+ci interessa solamente trovare un buon stato (non il relativo cammino), eventualmente
+rilassando anche le ipotesi di determinismo e di osservabilit`a... dove con buon stato si
+intende un ottimo locale. Se l’ambiente non `e deterministico, allora lo stato successivo
+non `e completamente determinato dallo stato corrente e dall’azione compiuta dall’agente,
+mentre se non `e osservabile signiﬁca che l’agente non ha accesso, in ogni momento, allo
+stato completo dell’ambiente.
+In un ambiente non deterministico, l’agente dovr`a avere un piano condizionale ed eseguire
+azioni diverse a seconda di ci`o che osserva. In caso di osservabilit`a parziale, l’agente dovr`a
+anche tenere traccia dei possibili stati in cui potrebbe trovarsi.
+3.1
+Ricerca Hill Climbing
+L’algoritmo di ricerca Hill Climbing tiene traccia solo dello stato corrente e, ad ogni itera-
+zione, passa allo stato vicino con valore pi`u alto (punta nella direzione che presenta l’ascesa
+pi`u rapida), senza considerare gli stati oltre quelli immediatamente vicini. Naturalmente,
+si potrebbe rimanere intrappolati in un massimo locale e, quindi, non raggiungere l’ottimo
+globale. E’ chiamato anche ricerca locale greedy.
+16
+RICERCA IN AMBIENTI COMPLESSI
+3.2
+Simulated Annealing
+E’ un algoritmo che permette di rimanere intrappolati in ottimi locali, combinando l’Hill
+Climbing con una esplorazione casuale. Intuitivamente, inizialmente si pu`o scuotere mol-
+to lo stato corrente (alta temperatura) per poi ridurre gradualmente l’intensit`a dello
+scuotimento.
+Come per l’Hill Climbing, a partire dallo stato corrente viene scelto un vicino. Tuttavia,
+in questo algoritmo non viene scelta la mossa migliore ma una mossa casuale. Se la mossa
+migliora la situazione (!E > 0), essa viene sempre accettata altrimenti la si accetta con
+probabilit`a e→!E
+T
+dove T `e la temperatura, che diminuisce ad ogni iterazione.
+Si noti che la probabilit`a decresce esponenzialmente in funzione della cattiva qualit`a della
+mossa e della temperatura e, pertanto, alle prime iterazioni (dove T `e alto) l’accettazione di
+mosse cattive sar`a maggiore. Se la velocit`a di ra!reddamento fa decrescere la temperatura
+da T a 0 molto lentamente, per una propriet`a della distribuzione di Boltzmann (e
+!E
+T )
+tutta la probabilit`a `e concentrata sui massimi locali, che l’algoritmo trover`a con probabilit`a
+1.
+3.3
+Ricerca con Azioni non Deterministiche
+Se mi trovo in un certo stato, facendo una determinata azione posso ﬁnire in pi`u stati.
+Dunque, `e necessario utilizzare un algoritmo che calcoli piani condizionali (il piano deve
+funzionare per ogni possibile conseguenza dell’azione).
+Si pu`o vedere un piano condizionale come una sequenza di passi if-then-else e azioni.
+Pi`u formalmente, un piano `e un Albero AND-OR. Un possibile piano `e il seguente:
+[azione,
+if(stato = x)
+then
+piano1
+else
+...]
+(3.1)
+Nell’istruzione if si veriﬁca quale `e lo stato corrente in seguito ad una azione non determi-
+nistica, che osserviamo solo al momento dell’esecuzione e che non conosciamo al momento
+della pianiﬁcazione.
+17
+RICERCA IN AMBIENTI COMPLESSI
+3.4
+Ricerca AND-OR
+Questo algoritmo di ricerca genera piani condizionali, ovvero degli alberi caratterizzati in
+maniera di!erente rispetto ai precedenti.
+In un ambiente deterministico, l’unica ramiﬁcazione `e introdotta da una scelta di azione
+da parte dell’agente... si parla di nodi OR. In un ambiente non deterministico, la rami-
+ﬁcazione `e anche legata alla scelta del risultato di un azione da parte dell’ambiente... si
+parla di nodi AND. Questi due tipi di nodi si alternano generando Alberi AND-OR.
+I nodi degli stati sono dei nodi OR in cui deve essere scelta un’azione, mentre nei nodi
+AND bisogna gestire ogni possibile risultato.
+Una soluzione per un problema di ricerca AND-OR consiste in un sotto-albero dell’albero
+AND-OR completo che:
+Ha un obiettivo (nodo) in ogni nodo foglia;
+Speciﬁca una sola azione in ognuno dei suoi nodi OR;
+Include ogni ramo uscente dai suoi nodi AND.
+Se lo stato corrente `e identico ad uno stato sul cammino della radice, l’algoritmo termina
+con failure (poich´e vi `e un ciclo). Con questo controllo ci si assicura che l’algoritmo termini
+in ogni spazio degli stati ﬁnito poich´e ogni cammino ﬁnisce in un obiettivo, un vicolo cieco
+oppure in uno stato ripetuto.
+Supponiamo di trovarci in un contesto ancora pi`u reale, dove le azioni possono fallire.
+In questo caso possiamo trovare delle soluzioni cicliche dove l’azione pu`o essere ripetuta
+ﬁnch´e essa non ha successo.
+18
+RICERCA IN AMBIENTI COMPLESSI
+Un piano ciclico `e una soluzione se:
+Ogni foglia `e uno stato obiettivo;
+Ogni foglia `e raggiungibile da qualsiasi punto nel piano;
+Il fallimento dell’azione `e causato dal non determinismo (quindi ripetendo l’azione
+essa prima o poi avr`a successo) e non da un ambiente osservato parzialmente.
+3.5
+Ricerca con Osservazioni Parziali
+Non abbiamo una conoscenza completa dello stato. Esistono i belief states: una serie di
+stati possibili per quello che ne sappiamo.
+Bisogna deﬁnire un piano mediante tre fasi:
+Predizione: si sceglie un’azione possibile;
+Percezione: si calcola l’insieme delle possibili percezioni;
+Aggiornamento: aggiorniamo il belief state combinando azione scelta e percezione.
+Si utilizza anche in questo caso una ricerca AND-OR che, tuttavia, non dispone di un
+singolo stato ma di un insieme di stati (belief states) ed `e presente un meccanismo di
+aggiornamento di quest’ultimo.
+19
+Capitolo 4
+Ricerca con Avversari e Giochi
+Consideriamo ambienti competitivi dove due o pi`u agenti hanno obiettivi in conﬂitto tra
+di loro, generando problemi di ricerca con avversari.
+Nella teoria dei giochi, esistono almeno tre approcci che si possono utilizzare negli ambienti
+multi-agente:
+Si considera, quando il numero di agenti `e elevato, un aggregato di questi come una
+economia, senza predire l’azione del singolo agente;
+Si considerano gli agenti avversari come un elemento che rende l’ambiente non
+deterministico, non considerando che gli avversari tentano attivamente di vincere;
+Si modellano esplicitamente gli avversari con tecniche di ricerca basate su alberi di
+giochi.
+Noi ci concentreremo sul terzo approccio.
+Esistono diversi tipi di giochi: possono essere deterministici o stocastici (vi `e una compo-
+nente casuale, come con i giochi di carte); a uno, due o pi`u giocatori; a somma zero e con
+informazione perfetta (ambiente completamente osservabile).
+Un gioco deterministico pu`o essere formalizzato nel seguente modo:
+Ha un insieme di stati S dove S0 `e lo stato iniziale;
+Ha un insieme di player P = {1, ..., N} che, solitamente, giocano a turni;
+Ha un insieme di mosse/azioni A legali nello stato s ↔S;
+Ha un modello di transizione (s, a) ↘S che deﬁnisce lo stato risultante dall’e-
+secuzione dell’azione a ↔A nello stato s ↔S;
+Ha una test di terminazione s ↘{true, false} che restituisce true se la partita
+`e ﬁnita altrimenti restituisce falso. Gli stati che fanno terminare la partita sono detti
+stati terminali;
+Ha una funzione di utilit`a
+(s, p) ↘r, detta anche funzione obiettivo/di
+payo” che deﬁnisce il valore numerico ﬁnale (risultato) per il giocatore p ↔P
+quando il gioco termina nello stato s ↔S.
+20
+RICERCA CON AVVERSARI E GIOCHI
+Una soluzione `e una strategia s ↘A che da uno stato s ↔S decide quale azione a ↔A
+conviene compiere per raggiungere l’obiettivo, ovvero uno stato terminale.
+Deﬁniamo Albero di Gioco un albero di ricerca che segue ogni sequenza di mosse ﬁno
+a raggiungere uno stato terminale. L’albero di gioco potrebbe essere inﬁnito se lo spazio
+degli stati `e illimitato o se le regole del gioco consentono di ripetere le posizioni (stati)
+all’inﬁnito.
+4.1
+Giochi a Somma Zero
+Vi sono due player che giocano a turni, dove le azioni che avvantaggiano un player dan-
+neggiano l’altro, dunque non `e possibile un risultato dove vincono entrambi.
+Vi `e un
+competizione pura: gli agenti hanno funzioni di utilit`a opposte e si pu`o pensare che
+uno cerchi di massimizzare un certo valore mentre l’altro cerca di minimizzarlo. Si dif-
+ferenziano dalla pi`u ampia categoria dei giochi generali, dove gli agenti hanno funzioni
+di utilit`a indipendenti e, di conseguenza, possono cooperare, ignorarsi o anche essere in
+competizione (magari in una forma minore rispetto a quella dei giochi a somma zero).
+4.2
+Ricerca MiniMax
+Chiamiamo i due player MIN e Max. La strategia di MAX deve essere un piano condizio-
+nale, una strategia che speciﬁca ogni reazione a ogni possibile mossa di MIN, e viceversa.
+Dunque, nei casi in cui il risultato `e binario (vittoria/sconﬁtta), per generare il piano
+condizionale potremmo usare una ricerca AND-OR ma se sono possibile pi`u risultati `e
+necessario utilizzare una ricerca pi`u generale, ovvero una ricerca MiniMax.
+Anzitutto, con mossa si intende che entrambi i giocatori abbiano compiuto un’azione
+mentre con ply (oppure strato) si indica un’azione compiuta da un singolo giocatore che
+ci fa scendere di un livello pi`u in basso nell’albero di gioco. Dato un albero di gioco,
+`e possibile determinare la strategia ottima calcolando il valore MiniMax di ogni stato.
+Si assume che entrambi i giocatori giochino in maniera ottima, altrimenti la strategia
+potrebbe essere non ottima.
+Il valore MiniMax di uno stato `e l’utilit`a (per MAX) di trovarsi nello stato corrispondente,
+`e calcolato ricorsivamente ed `e deﬁnito come:
+21
+RICERCA CON AVVERSARI E GIOCHI
+Ad esempio, consideriamo il seguente albero di gioco:
+Ad ogni turno, MAX preferir`a muoversi verso uno stato di valore massimo mentre MIN
+preferir`a muoversi verso uno stato di valore minimo. Nell’esempio, i nodi terminali pren-
+dono i loro valori dalla funzione di utilit`a; il primo nodo MIN, ovvero B, ha 3 successori
+con valori {3,12,8} quindi il suo valore MiniMax `e pari a 3... per lo stesso motivo, il valore
+MiniMax dei nodi C,D `e pari a 2; il nodo MAX ha 3 successori con valori {3,2,2}, quindi
+il suo valore MiniMax `e 3.
+Di seguito viene mostrato l’algoritmo:
+Quanto `e e”ciente questa ricerca? Nel caso peggiore bisogna esplorare tutto lo spazio di ri-
+cerca, come una DFS. Quindi, la complessit`a spaziale `e O(b · m) mentre quella temporale
+`e O(bm) dove m `e la profondit`a e b `e il fattore di branching.
+22
+RICERCA CON AVVERSARI E GIOCHI
+4.3
+Alpha-Beta Pruning
+Il numero di stati del gioco cresce esponenzialmente all’aumentare della profondit`a dell’al-
+bero. Dunque, per velocizzare l’algoritmo si possono potare porzioni dell’albero che non
+di!erenziano il risultato ﬁnale.
+L’algoritmo di ricerca Alpha-Beta Pruning `e una ricerca MiniMax che utilizza i valori
+ε (il miglior valore di MAX nel cammino dalla radice) e ϑ (il miglior valore di Min
+nel cammino dalla radice). Utilizzando tali valori, aggiornandoli durante la ricorsione, `e
+possibile fare pruning.
+Consideriamo un esempio.
+In ogni nodo viene indicato l’intervallo di valori che esso pu`o assumere (inizialmente tutti).
+Vediamo nel dettaglio ogni istante:
+(a): la prima foglia sotto B ha valore 3, quindi B (che `e un nodo MIN) pu`o assumere
+al pi`u valore 3;
+(b): la seconda foglia sotto B ha valore 12, MIN la eviterebbe, per cui il valore di
+B `e ancora al pi`u 3;
+(c): la terza foglia sotto B ha valore 8, siccome abbiamo considerato tutti i successori
+di B possiamo dire che il valore di B `e e!ettivamente 3. Di conseguenza, possiamo
+dedurre che il valore della radice A `e almeno 3;
+(d): la prima foglia sotto C ha valore 2, quindi C che `e un nodo MIN ha valore al
+pi`u 2. Ma sappiamo che B vale 3, per cui MAX non sceglierebbe C in nessun caso,
+23
+RICERCA CON AVVERSARI E GIOCHI
+quindi non ha senso considerare i successori di C. Questo `e un esempio di potatura
+alpha-beta;
+(e): la prima foglia sotto D ha valore 14, qundi D vale al pi`u 14 che `e un valore
+maggiore della miglior alternativa per MAX (che `e 3) dunque dobbiamo continuare
+ad esplorare i successori di D. Inoltre, ora che conosciamo tutti i successori della
+radice, possiamo dire che il suo massimo valore `e 14;
+(f): il secondo successore di D vale 5, quindi dobbiamo continuare ad esplorare,. Il
+terzo successore ha valore 2, dunque D vale esattamente 2. La decisione di MAX
+alla radice `e di muovere nello stato B, che o!re un valore di 3.
+Il pruning `e particolarmente e”cace se `e presente un ordinamento per i valori dei suc-
+cessori. Se ci fosse un ordinamento perfetto, allora la ricerca alpha-beta esaminerebbe
+solo O(b
+m
+2 ) nodi mentre se ci fosse un ordinamento casuale, allora ne esaminerebbe
+O(b
+3
+4m)
+Nei giochi reali, gli alberi di ricerca sono molto grandi, dunque non abbiamo il tempo di
+arrivare alle foglie. Per sopperire a tale problema si possono utilizzare ricerche a profondit`a
+limitata ed euristiche sebbene non in questi casi non si abbiano garanzie di ottimalit`a.
+4.4
+Heuristic Alpha-Beta
+Siccome il tempo di calcolo `e limitato, possiamo interrompere la ricerca in anticipo fer-
+mandoci ad una certa profondit`a (siccome non abbiamo raggiunto uno stato terminale e
+non abbiamo una valutazione reale dell’utilit`a) e, quindi, usiamo una valutazione euristica
+della bont`a di dove ci troviamo. Sostituiamo il test di terminazione con un Test di Taglio
+che deve restituire vero per gli stati terminali e che decide di interrompere la ricerca in
+base alla profondit`a dello stato in cui ci troviamo oppure in funzione di una sua qualsiasi
+propriet`a. Se il test di taglio ha successo, piuttosto che utilizzare la funzione di utilit`a
+usiamo la sua stima EVAL, che dipende dallo stato e, come detto prima, dalla profondit`a.
+Anche in questo caso l’euristica fornisce una stima e deve essere tale per cui:
+utility(lose, player) ↓eval(state, player) ↓utility(win, player)
+(4.1)
+Inoltre, il suo calcolo non deve richiedere troppo tempo (deve velocizzare la ricerca) e deve
+essere strettamente correlata alle possibilit`a di vincere. Essa risulta cruciale anche poich´e,
+se `e buona, possiamo ordinare le mosse in funzione del suo valore per favorire il pruning
+24
+RICERCA CON AVVERSARI E GIOCHI
+(ricordando che, comunque, l’euristica fornisce una stima e pertanto si potrebbero tagliare
+dei nodi importanti).
+4.5
+Monte Carlo Tree Search
+In alcuni casi `e di”cile deﬁnire buone euristiche o, magari, il fattore di branching `e troppo
+elevato e quindi bisogna limitare la ricerca a pochi livelli. In questi casi si utilizza una
+ricerca ad Albero Monte Carlo.
+Si scelgono le mosse in maniera casuale (o secondo una determinata politica) senza con-
+siderare gli altri nodi sullo stesso livello, scendendo in profondit`a. Sostanzialmente, si
+utilizza una sorta di DFS senza backtracking che simula le partite.
+Questa ricerca costruisce una albero che aggiorna ad ogni iterazione, secondo i seguenti
+passi:
+Selezione: a partire dalla radice dell’albero di ricerca (che corrisponde allo stato
+corrente), mediante una politica di selezione si sceglie un nodo ﬁglio e cos`ı via,
+sino ad arrivare ad una foglia (un nodo mai esplorato);
+Espansione: si genera un nuovo ﬁglio (o pi`u di uno) a cui viene assegnato un
+termine di sfruttamento, inizialmente pari a 0
+0;
+Simulazione: a partire dal nodo appena generato, scegliamo le mosse per entram-
+bi i giocatori secondo una politica di simulazione sino a giungere ad uno stato
+terminale;
+Retropropagazione: si utilizza il risultato della simulazione per aggiornare tutti
+i nodi esplorati sino alla radice del nodo espanso, aggiornando il loro termine di
+sfruttamento.
+Si noti che la politica di simulazione viene utilizzata per scegliere le mosse a partire dal
+nodo espanso e, idealmente, deve avere una distorsione verso le mosse pi`u vincenti (si
+possono utilizzare delle euristiche). La politica di selezione, invece, deve garantire un trade-
+o! tra l’esplorazione di stati su cui sono state fatte poche simulazioni (che fornirebbero
+indicazioni incerte) e stati che hanno ottenuti buoni risultati, per ottenere una stima pi`u
+accurata. Alla ﬁne (scadere del tempo della mossa) viene scelta la mossa con il pi`u alto
+numero di simulazioni.
+Una tipica politica di selezione `e l’upper conﬁdence bounds applied to trees, ovvero
+UCB1(n) = U(n)
+N(n) + c ·
+!
+log N(padre(n))
+N(n)
+(4.2)
+25
+RICERCA CON AVVERSARI E GIOCHI
+dove
+c `e una costante;
+U(n) `e l’utilit`a totale di tutte le simulazioni passate su n;
+N(n) `e il numero di simulazioni passate per n;
+U(n)
+N(n) `e il fattore di sfruttamento;
+"
+log N(padre(n))
+N(n)
+`e il fattore di esplorazione.
+4.6
+Esempio - Pacman Veloce
+Consideriamo il gioco Pacman vs Fantasmi. E’ un gioco su grafo dove i fantasmi vogliono
+catturare pacman.
+Modelliamo le posizioni del labiritinto con un grafo (il grafo `e pi`u
+generale, tutti i labirinti possono essere modellati su graﬁ, che permettono di rappresentare
+anche dei giochi che non sarebbero rappresentabili su una mappa planare). Lo spazio di
+movimento `e dato dalla componente connessa (pacman veloce pi`u muoversi in pi`u nodi
+connessi in una singola mossa) ridotta dei nodi dove sono presenti fantasmi.
+L’obiettivo dei fantasmi `e di catturare pacman mentre il suo `e non farsi catturare.
+Deﬁniamo il grafo di gioco come G = (V, E).
+Siano F = 1, 2, ..., k i fantasmi e sia P pacman veloce (corrispondente al nodo pi`u piccolo
+della relativa componente connessa). Uno stato `e deﬁnito da F 1, ..., F k, P ovvero i nodi
+su cui si trovano i fantasmi e pacman, i quali si muovono contemporaneamente.
+Quale `e una strategia vincente per i fantasmi?
+Esiste una strategia vincente se esistono k nodi dove i fantasmi possono posizionarsi (OR)
+tali per cui per ogni nodo in cui pu`o posizionarsi pacman (AND) esistono k nodi dove i
+fantasmi possono posizionarsi (OR), e cos`ı via.
+L’algoritmo per risolverlo `e non deterministico (AND-OR).
+Dato un grafo arbitrario e k ﬁssato, questo tipo di algoritmi `e polinomiale se rappresen-
+tiamo lo stato come logaritmo.
+input :
+||G||
+sizeOfState :
+(k + 1) · log2 |V |
+(4.3)
+dove:
+(k + 1) sono i fantasmi e pacman;
+il log2 serve ad estrarre il numero di bit;
+|V | `e l’insieme di vertici.
+Possiamo trasformare questa razza di problemi in problemi deterministici con complessit`a
+polinomiale se lo spazio degli stati `e polinomiale.
+26
+Capitolo 5
+Incertezza e Utilit`a
+Finora abbiamo sempre supposto che gli agenti fossero razionali, tuttavia non `e sempre
+cos`ı. Spesso essi sono dotati di una componente casuale che, tipicamente, `e dovuta a due
+motivi:
+Vi `e un aspetto realmente casuale;
+Possiamo modellare l’incertezza che abbiamo mediante la Teoria della Probabilit`a.
+Inoltre, `e possibile anche che le azioni di un agente falliscano. In ogni caso, non `e pi`u
+presente il concetto di caso peggiore ma bens`ı vi `e il caso pi`u probabile, ovvero il valore
+atteso che `e possibile determinare a partire da una particolare situazione.
+I nodi di tipo max si comportano come in MiniMax. I nodi chance, invece, sono simili ai
+nodi min, tuttavia sono governati dal caso, che tengono conto delle incertezze. A seconda
+di quale nodo chance si veriﬁca, il nostro agente seleziona uno dei suoi nodi ﬁgli in modo da
+massimizzare l’utilit`a attesa (valore atteso), ovvero la somma del valore di tutti i risultati
+pesati in base alla probabilit`a di ciascun azione.
+27
+INCERTEZZA E UTILITA’
+Ad esempio, il valore atteso del nodo chance in ﬁgura `e pari a 10... utilizzando MiniMax
+il suo valore sarebbe stato pari a -12, se fosse stato un nodo di min.
+Che probabilit`a possiamo utilizzare in Expectimax?
+E’ necessario disporre di un modello probabilistico di come il nemico (o l’ambiente) si com-
+porter`a in ogni stato. Le probabilit`a potrebbero essere note oppure potremmo stimarle.
+Tali stime si possono fare anche utilizzando le simulazioni. Si ha un nodo di chance per
+ogni risultato che non dipende da noi (dipende dal nemico/ambiente).
+Supponendo che il nostro avversario stia utilizzando una strategia MiniMax con profondit`a
+2, utilizzando l’80% del suo tempo. La miglior strategia che noi potremmo utilizzare `e Ex-
+pectiMax. Simulare le probabilit`a `e molto dispendioso computazionalmente, soprattutto
+siccome il nostro avversario simula anche le nostre mosse.
+Quando si lavora con strategie di questo tipo, a volte non esiste una strategia ottima
+deterministica. Supponendo di avere un player la cui strategia si adatta alle nostre mosse,
+il miglior scenario sarebbe quello di compiere scelte random in modo che, teoricamente, si
+avrebbe una probabilit`a di vittoria del 50%. Infatti, l’introduzione di incertezza potrebbe
+migliorare il valore atteso che ricerchiamo.
+Supponendo di non aver ancora conosciuto l’avversario, vi sono dei rischi sia nel caso in
+cui si `e troppo pessimisti (catalogare come pericolose alcune situazioni che non lo sono)
+che nel caso in cui si `e troppo ottimisti (supporre incertezza quando non vi `e).
+Esistono alcuni giochi, come il Backgammon, dove vi `e sia il giocatore avversario che
+l’incertezza Nel backgammon io devo giocare, dopodich´e vi `e un lancio di dadi e, sulla
+base di quest’ultimo, l’avversario sceglie l’ultima mossa.
+28
+INCERTEZZA E UTILITA’
+Dal punto di vista algoritmico non cambia molto, poich´e se il nostro player pu`o usare
+una strategia ExpectiMiniMax: vi sono nodi Min, Max e Chance, per i nodi chance si
+calcola il valore atteso, ovvero la somma del valore di tutti i risultati pesati in base alla
+probabilit`a di ciascuno dei nodi ﬁgli.
+Se avessimo pi`u agenti, ogni nodo avrebbe associata una tripla che contiene le utilit`a/stime
+associate a ciascun player in quello stato. Infatti, nel caso di giochi a somma zero bastava
+un unico valore poich´e il valore associato ad un player era opposto all’altro. Naturalmen-
+te, gli algoritmi possono fare emergere (anche in maniera non predeterminata) forme di
+coalizione tra i vari giocatori, ciascuno cercando di massimizzare il suo valore.
+29
+INCERTEZZA E UTILITA’
+5.1
+Utilit`a
+In teoria, un agente razionale dovrebbe massimizzare la sua utilit`a.
+E’ sempre cos`ı?
+Esistono sempre delle funzioni di utilit`a che rispecchiano e!ettivamente quello a cui uno
+ambisce ad avere?
+Finora, considerando il ragionamento MiniMax abbiamo visto che la scala delle funzioni
+non contava. Difatti, in questi casi si parla di insensibilit`a rispetto alle trasformazioni
+monotone, come nella seguente ﬁgura.
+In altri contesti, la scala `e importante. Normalmente, quando si ha incertezza, si va a
+stimare le probabilit`a dei vari eventi possibili. Le utilit`a sono delle funzioni che trasformano
+i risultati (stati del mondo) in numeri reali che descrivono le preferenze dell’agente. Per
+modellare tali preferenze rispetto ad outcome incerti, si utilizzano le lotterie: si hanno dei
+premi associati a delle probabilit`a.
+Formalizziamo meglio quanto stiamo dicendo: vi `e una lotteria con due premi A,B. Al
+premio A `e associata una probabilit`a p mentre al premio B `e associata una probabilit`a
+(1 →p). L’agente deve esprimere una preferenza tra A,B.
+Indichiamo una lotteria con L = [p, A;
+(1 →p), B].
+Indichiamo una preferenza con A ≃B.
+Indichiamo una indi!erenza con A ⇐B.
+Per poter parlare di preferenze razionali, `e necessario introdurre alcune propriet`a, come
+l’Assioma di Transitivit`a.
+(A ≃B) ⇒(B ≃C) =⇑(A ≃C)
+(5.1)
+Perch´e `e importante questo propriet`a?
+Supponiamo che un agente abbia preferenza non transitive.
+Se B > C, allora un agente con C pagherebbe 1 centesimo per ottenere B;
+Se A > B, allora un agente con B pagherebbe 1 centesimo per ottenere A;
+Se C > A, allora un agente con A pagherebbe 1 centesimo per ottenere C.
+30
+INCERTEZZA E UTILITA’
+Dunque, qualora un agente non avesse preferenze transitive, si innescherebbe un ciclo
+inﬁnito.
+Esistono anche altri assiomi di razionalit`a:
+Orderability: o vi `e una preferenza o i due premi sono indi!erenti. Pi`u precisa-
+mente, si ha che
+(A ≃B) ⇓(B ≃A) ⇓(A ⇐B)
+(5.2)
+Continuity: se vi `e una sequenza di preferenze per 3 premi, allora esiste un livello
+di probabilit`a tali per cui la lotteria che si otterrebbe utilizzando i premi A,C con
+quel livello di probabilit`a, `e indi!erente rispetto a B. Pi`u precisamente, si ha che
+A ≃B ≃C =⇑⇔p : [p, A; (1 →p), C] ⇐B
+(5.3)
+Substitutability: se A,B sono indi!erenti, allora vi sono anche due relative lotterie
+indi!erenti. Pi`u precisamente:
+A ⇐B =⇑[p, A; (1 →p), C] ⇐[p, B; (1 →p), C]
+(5.4)
+Monotonicity: se A `e preferibile a B possiamo estrarre una relazione tra le lotterie.
+Pi`u precisamente:
+A ≃B
+=⇑
+(p ↖q ↙⇑[p, A; (1 →p), B] ∝[q, A; (1 →q), B])
+(5.5)
+Esiste un teorema (Ramsey, von Neumann & Morgenstern) molto importante derivati da
+questi assiomi: se vengono soddisfatti questi assiomi, allora esiste una funzione a valori
+reali U tale che:
+U(A) ↖U(B)
+↙⇑
+A ∝B
+(5.6)
+L’utilit`a di questa lotteria `e pari al valore pesato sulle utilit`a... in altri termini, indicando
+con Si l’iesimo stato, si ha che:
+U([p1, S1; ... ; pn, Sn]) =
+#
+i
+pi · U(Si)
+(5.7)
+Dunque, i valori assegnati da U preservano le preferenze sia dei premi che delle lotterie.
+Il Principio della Massima Utilit`a Attesa (MEU) lo abbiamo gi`a visto con Expec-
+tiMax. Sfruttiamo l’azione che massimizza l’utilit`a attesa e, per il problema che abbiamo
+visto, va bene. Se consideriamo gli umani, tuttavia, tale approccio non va bene. Gli uma-
+ni, infatti, utilizzano utilit`a di scale di!erenti (tipo i Micromorts - la probabilit`a di uno su
+un milione di morire oppure i QALYs - quality adjusted life years, utile per le decisioni in
+ambito medico che coinvolgono rischi importanti).
+L’utilit`a `e invariante rispetto a trasformazioni lineari positive. Se non ci sono lotterie
+(ovvero vi sono premi deterministici) possiamo utilizzare utilit`a ordinarie, dove i premi
+sono ordinati.
+31
+INCERTEZZA E UTILITA’
+Dunque, come ragionano gli umani?
+Se dovessimo scegliere tra ricevere 400.000 dollari o fare un lancio di moneta dove se esce
+testa vinciamo un milione di dollari e se esce croce perdiamo... molti sceglierebbero di
+ricevere i 400.000 sebbene il valore atteso del lancio di moneta `e maggiore (500.000). Da
+ci`o si evince come gli umani non ragionino in funzione dell’utilit`a attesa. Infatti, per valori
+piccoli le persone preferiscono sicurezza ma per valori grande sono pi`u tendenti al rischio.
+Di conseguenza, la ricchezza di una persona inﬂuenza fortemente queste scelte: il valore
+del denaro non coincide con l’utilit`a ed il primo `e correlato alla ricchezza dello stesso.
+La di!erenza tra il valore atteso ed il valore monetario che una persona si prendere con
+certezza (certainty equivalent), `e deﬁnito premio di assicurazione.
+Questi concetti
+vengono utilizzati, ad esempio, nelle assicurazioni: una grande azienda si compra la nostra
+probabilit`a della lotteria e ci da il certainty equivalent... dunque `e uno scenario in cui
+vinciamo entrambi.
+Gli essere umani (razionali) difatti sono degli essere irrazionali. Infatti, consideriamo il
+seguente esempio: vi sono due coppie di lotterie, ovvero A-B, C-D
+Molte persone preferiscono B rispetto ad A e C rispetto a D.
+Tuttavia se U($0) = 0 otterremo che
+Il quale `e un assurdo. Non esiste alcuna funzione di utilit`a che `e consistente con questa
+scelta.
+32
+Capitolo 6
+Constraint Satisfaction Problems
+I problemi di soddisfacimento di vincoli sono dei problemi piuttosto generali: in questo
+contesto parliamo di strategie di risoluzione di problemi che trovano svariate applicazioni.
+Fino ad ora abbiamo studiato l’IA dal punto di vista degli agenti... ora, invece, ci sleghiamo
+da questa concezione. In questo caso, ci interessa trovare unicamente l’obiettivo (non come
+arrivarci).
+In un problema di CSP abbiamo n variabili, per ciascuna di queste variabili abbiamo
+associato un dominio di valori ammissibili.
+I domini possono essere sia continui (e
+inﬁniti) che discreti (ﬁniti). L’obiettivo `e quello di individuare una soluzione, ovvero un
+assegnamento di valori alle variabili che soddisﬁno determinati vincoli.
+Consideriamo un esempio: vogliamo colorare una mappa utilizzando 3 colori.
+33
+CONSTRAINT SATISFACTION PROBLEMS
+Formalizziamo il problema:
+Variabili: tutte le possibili nazioni;
+Dominio: tutti i possibili colori che si possono associare alle nazioni,
+ovvero D = {red, green, blue};
+Vincoli: le nazioni adiacenti devono avere colori diversi. Possiamo esprimere ta-
+le vincolo sia in maniera implicita, ovvero W A ′= NT , sia in maniera esplicita:
+(W A, NT ) ↔{(red, green), (red, blue), ...};
+Soluzioni: sono tutti i possibili assegnamenti che soddisfano i vincoli.
+Normalmente, si assume che i vincoli siano rappresentati in maniera esplicita... se que-
+sto non fosse possibile si adotta un approccio implicito.
+A seconda di come vengono
+rappresentati i vincoli si ottengono cose di!erenti.
+Quando utilizziamo una rappresentazione esplicita `e come se avessimo un DB. In partico-
+lare, per ogni vincolo abbiamo uno schema di relazione che `e l’insieme delle variabili ed
+abbiamo un’insieme di istanze di tale relazione che descrive i valori di dominio ammissibili.
+Ad esempio, riprendendo l’esempio del precedente problema, in logica esplicita avremmo
+i seguenti vincoli (ed altri naturalmente):
+C1(WA,NT)
+C2(WA,SA)
+C3(NT,SA)
+Questi tre vincoli possono essere visti come tre di!erenti istanze di uno stesso schema di
+relazione.
+Una istanza di un CSP I = C, DB `e data dall’insieme di vincoli C e dal DB (insiemi di
+istanze di relazione), dove l’insieme di vincoli `e deﬁnito come C = {r1(x1), r2(x2), ..., rn(xn)}.
+Naturalmente, xi `e il vettore delle variabili che occorrono nell’iesimo vincolo.
+Indicando con D l’unione di tutti i domini, una soluzione `e un mapping dalle variabili ai
+domini h : V ↘D, deﬁnito in maniera tale che
+↑ci(xi) ↔C,
+si ha
+h(ri(xi)) ↔DB
+(6.1)
+In maniera alternativa, indicando con Ri la relazione nel DB associata al vincolo ci che
+presenta arit`a a, se h `e una soluzione si ha che:
+↑ci(V1, ..., Va), allora < h(V1), ..., h(Va) >↔Ri
+(6.2)
+In maniera compatta possiamo dire che h `e deﬁnita in maniera tale che h(Ci) ↔Ri. Pi`u
+precisamente, la soluzione h di un problema di CSP `e un omomorﬁsmo tra due strutture
+relazionali, dove la prima `e la struttura relazionale data dagli schemi dei vincoli e la
+seconda `e la struttura relazionale data dai contenuti dei vincoli.
+34
+CONSTRAINT SATISFACTION PROBLEMS
+Nel caso di relazioni e domini discreti, il problema di CSP diventa un problema di Basi
+di Dati: risolvere questi questi vincoli vuol dire risolvere un problema di conjuctive
+queries o, se vogliamo, `e un problema equivalente a select- project- join queries. La
+complessit`a di fare queste query `e un problema NP-Hard, tuttavia `e necessario fare qualche
+precisazione... nel mondo delle Basi di Dati si distingue tra:
+Data complexity: assumiamo che la query sia costante (ovvero il numero di k
+ﬁssato) dunque il problema diventa polinomiale (anche se brutto). Si assume, dun-
+que, che le query siano piccole e che il database sia enorme. Tipicamente si utilizza
+questo approccio nei DB;
+Query complexity: si assume che il DB sia ﬁssato mentre varia la query. Questo
+caso tipicamente si utilizza nel caso dei CSP. Difatti si assume che il DB sia molto
+piccolo (come nel nostro caso) mentre il numero di strutture sia elevato. Il problema
+rimane NP-Hard;
+Combined complexity: non si fa alcuna assunzione, si costruiscono algoritmi che
+vadano bene sia nel caso di DB grandi o di molteplici strutture.
+6.1
+Constraint Graph e Hypergraph
+Un Constraint Graph `e un grafo che modella la struttura dei constraint, ovvero lo
+schema dei constraint. Dato un problema CSP < V, E, C >, il grafo di questa istanza
+`e un grafo non orientato G =< V, E > dove V `e l’insieme delle variabili mentre E `e
+l’insieme delle coppie {{Vi, Vj} : {Vi, Vj} ↔Ci per qualche constraint Ci ↔C}.
+Sostanzialmente, i rami sono tutte le coppie non ordinate (abbiamo usato infatti insiemi
+di due variabili nella deﬁnizione, non liste ordinate) di variabili che occorrono nello stesso
+constraint. Naturalmente, un constraint pu`o essere anche non binario, ad esempio:
+C1(V1,V2,V3)
+C2(V1,V3,V4)
+C3(V4,V2)
+35
+CONSTRAINT SATISFACTION PROBLEMS
+In questo caso, il constraint graph `e il seguente:
+Se lo deﬁniamo in questo modo, tutte le variabili che appartengono ad uno stesso constraint
+sono collegate tra di loro.
+Se il problema contiene vincoli con pi`u di due variabili, il
+constraint graph non `e la migliore struttura utilizzabile. Sarebbe pi`u opportuno utilizzare
+un ipergrafo: `e una generalizzazione di un grafo dove un iper-arco contiene pi`u di due
+nodi... un iper-arco modella relazioni piuttosto che coppie.
+L’ipergrafo `e deﬁnito come H = (V, He) dove He `e l’insieme dei vincoli Ci ↔C. Esso
+`e pi`u informativo poich´e permette di capire le variabili in che modo sono collegate tra di
+loro in funzione dei vincoli.
+6.2
+Problema dell’Omomorﬁsmo
+Indicato anche con Hom, consiste nel decidere se esiste un omomorﬁsmo tra due strutture
+relazionali. Cosa `e una struttura relazionale? Abbiamo un certo insieme di simboli di
+relazione r1, ..., rn e ↑ri indichiamo con a(ri) la sua arit`a. Oltre ai simboli di relazione,
+nelle strutture relazionali `e presente anche un DB (insieme di tuple).
+Per ogni relazione possiamo avere un insieme di tuple che costituiscono il DB, ovvero ↑ri
+abbiamo una relazione rDB
+i
+in un DB, dove indichiamo con ri(A, B, C) uno schema,
+dove, naturalmente, possiamo avere varie tuple quali ad esempio < 1, 2, 3, < 1, 4, 5, etc.
+Possiamo indicare una istanza di relazione anche come, ad esempio, r1(1, 2, 3)... in par-
+ticolare questa rappresentazione `e utilizzata nella logica, dove i DB sostanzialmente sono
+degli insiemi di fatti (e ogni istanza `e un atomo). In una istanza di DB, una estensio-
+ne di relazione `e costituita da quelle tuple (sottoinsieme di DB) che appartiene a quella
+relazione.
+36
+CONSTRAINT SATISFACTION PROBLEMS
+Consideriamo un esempio. Abbiamo la seguente struttura:
+Si ha una relazione r tale per cui:
+r(A, B) ⇒r(B, D) ⇒r(D, C) ⇒r(C, A)
+(6.3)
+Supponiamo di avere un CSP dove si devono soddisfare i vincoli di cui sopra. Supponiamo
+di avere come dominio D = 1, 2, 3, 4, 5, 6. Supponiamo di disporre delle seguenti istanze
+{(1, 2), (1, 4), (2, 5), (3, 6)} per r. In questo caso non esiste alcuna soluzione. Se in-
+vece avessimo {(1, 2), (1, 4), (2, 5), (3, 6), (5, 6), (6, 1)}, allora una possibile soluzione
+sarebbe A = 1, B = 2, C = 5, D = 6.
+Possiamo guardare la struttura delle variabili come se fossero loro stesse un DB. Dunque,
+supponiamo di avere il seguente DB: (a, b), (b, c), (d, c), (c, a). In sostanza considero le
+variabili del CSP come se fossero delle costanti di un DB. Se ho una stessa relazione r che
+ha due tuple a ↘b, b ↘d, posso ridurre le due tuple a a ↘d. Continuando su questo
+ragionamento, se associo con un endomorﬁsmo h le variabili D = a,
+B = c ottengo un
+sotto-problema equivalente I↑, con I↑∞I, che ha un unico vincolo da soddisfare, ovvero
+r(C, A), che `e pi`u semplice da risolvere. Una qualunque soluzione h↑del problema pi`u
+piccolo permette di risalire alla soluzione del problema originario, che `e pari a h · h↑.
+Il core di un CSP `e la pi`u piccola sotto-struttura (sotto-problema) per la quale esiste un
+endomorﬁsmo della struttura in se stessa che permette appunto di sempliﬁcare il problema.
+Esso `e unico.
+Pi`u formalmente, possiamo dire che Ic `e il core di I se esiste un omomorﬁsmo h tale che
+Ic = h(I) e per ogni endomorﬁsmo h↑di I, si ha che h↑(I) ′∈Ic.
+Si noti che scrivere Ic = h(I) `e un abuso di notazione, siccome h mappa variabili in ele-
+menti del dominio... con questo abuso a!ermiamo che Ic `e quello che otterremo applicando
+h a tutti gli elementi del dominio.
+In realt`a, il core `e unique up to isomorphism, ci possono essere pi`u core ma sono tutti
+isomorﬁ(due graﬁisomorﬁsono uguali a meno delle variabili) tra di loro.
+37
+CONSTRAINT SATISFACTION PROBLEMS
+Supponiamo di avere il seguente grafo. Vogliamo vedere se `e 3-colorabile.
+La complessit`a di questo problema `e NP-Completo. Supponiamo di vederlo come un CSP.
+Abbiamo tanti vincoli identici tra di loro ed ogni nodo pu`o essere visto come una variabile.
+Possiamo esprimere il seguente vincolo c.
+r g
+r b
+g b
+b r
+b g
+Pi`u formalmente, avremmo le variabili V = {1, 2, 3, 4, 5, 6, 7, 8, 9}, il loro dominio
+D = {r, g, b} e il vincolo c(1, 2) ⇒c(1, 3) ⇒c(2, 3) ⇒....
+Una possibile soluzione sarebbe {1 = g, 2 = r, 3 = b, 4 = b, 5 = g, 6 = r, 7 = g, 8 = r, 9 = b},
+ma ve ne sono altre.
+Esiste un endomorﬁsmo di questo grafo che `e un triangolo? Se esiste un tale endomorﬁsmo,
+il problema delle 3-colorabilit`a si riduce nel problema di individuare un mapping dal grafo
+al triangolo. In questo caso esiste ma in generale risolvere questo problema `e di”cile.
+Individuare il core `e anche pi`u di”cile.
+38
+CONSTRAINT SATISFACTION PROBLEMS
+6.3
+Backtracking Search
+E’ la ricerca base non informata per risolvere problemi di CSP.
+L’algoritmo sceglie ripetutamente una variabile non assegnata e poi prova uno a uno
+tutti i valori del suo dominio, cercando di estendere ogni assegnamento ad una soluzione
+attraverso una chiamata ricorsiva. Se la chiamata ha successo viene restituita la soluzione
+mentre se fallisce l’assegnamento (vincolo non soddisfatto) l’assegnamento `e riportato allo
+stato precedente e si prova il valore successivo. Se non si trova alcun valore che funziona,
+viene restituito fallimento.
+Per migliorare il backtracking posso usare il forward checking: `e un metodo di ﬁltraggio
+che tiene traccia del dominio per le variabili non assegnate, eliminando (ﬁltrando) i possibili
+valori di dominio che violerebbero il vincolo negli assegnamenti successivi.
+In questo
+modo i possibili valori di dominio sono consistenti rispetto a quel vincolo. Sulla base di
+questo ragionamento, possiamo introdurre un concetto molto importante, ovvero la arc
+consistency, che estende la forward checking considerando tutti i vincoli e non uno solo.
+Un arco x ↘y `e consistente ↙⇑↑x, ⇔y nella testa a cui pu`o essere assegnato un valore
+consistente. Se ho un valore x che non ha alcun valore y che va bene, allora possiamo
+eliminare il valore x perch´e il vincolo non potr`a mai essere soddisfatto.
+Possiamo ottimizzare il backtracking forzando la arc consistency: non solo si associa un
+valore alla variabile osservando quel vincolo (come nel forward checking) ma si forza questo
+check anche agli altri vincoli che sono collegati, scatenando una propagazione.
+39
+CONSTRAINT SATISFACTION PROBLEMS
+Si noti che se x perde un valore, vanno ricontrollati tutti i vicini di x.
+6.4
+K-Consistency
+Generalizziamo quanto abbiamo detto in precedenza:
+1-Consistency: `e la consistenza a livello di singola variabile;
+2-Consistency: `e la arc-consistency... per ogni coppia di nodi, ogni assegnamento
+consistente ad una variabile pu`o essere esteso all’altra variabile. Qualora le strutture
+fossero acicliche, forzare la arc consistency implica che esiste una soluzione. il costo
+`e quadratico;
+K-Consistency: `e l’estensione della arc consistency a k nodi. Ogni assegnamento
+consistente a k →1 pu`o essere esteso al k-esimo nodo. Questo ci permette di risolvere
+in maniera e”ciente alcuni problemi.
+Naturalmente, aumentare il k aumenta il
+ﬁltraggio che, allo stesso tempo, aumenta il costo computazionale (O(n · dk)) dove
+n `e il numero di variabili e d `e il massimo numero di valori distinti fra i domini delle
+variabili... se k `e ﬁssato, il costo `e polinomiale.
+Come abbiamo visto, nel backtracking possiamo scegliere una variabile e scegliere un
+valore e, a seconda di queste scelte, si ottengono performance pratiche di!erenti. Vediamo
+qualche euristica:
+Minimum Remaining Values (MRV): consiste di variable ordering. Si sceglie
+la variabile che presenta il minor numero di valori legali rimasti nel dominio. Si
+presuppone che sia stato fatto un ﬁltraggio. Questo approccio mi permette o di
+andare avanti oppure di fallire in maniera veloce, cambiando velocemente la variabile
+scelta. E’ un approccio deﬁnito anche come fail-fast ordering.
+40
+CONSTRAINT SATISFACTION PROBLEMS
+Least Constraining Value: consiste di value ordering.
+Si sceglie come valore
+quello che `e meno restrittivo o, in altri termini, toglie meno valori dai domini delle
+variabili rimanenti. Naturalmente, per determinare questo ordinamento potrebbe
+essere necessario fare qualche computazione in pi`u.
+Cosa succede se, piuttosto di partire dall’assegnamento vuoto e continuare assegnando
+valori, parto da un assegnamento completo (dove avr`o dei vincoli insoddisfatti) e provo a
+soddisfare i vincoli? Finch´e il problema non `e risolto: seleziono una variabile in conﬂitto,
+ne sistemo il valore e continuo. Come posso sistemare la variabile? Posso scegliere un
+valore di modiﬁca che `e quello del minimo conﬂitto (che viola il minor numero di con-
+straint). Posso utilizzare euristiche del tipo hill climbing, simulated annealing in funzione
+di tale valore di minimo conﬂitto per individuare la soluzione. Questi algoritmi funzionano
+bene nella maggior parte dei casi tranne in un caso particolare, detto punto critico, dove
+si veriﬁca una transizione di fasi (molti algoritmi basati su euristiche hanno tale proble-
+ma, non solo questo tipo). Tale punto critico si veriﬁca quando il problema `e piuttosto
+bilanciato (come numero di vincoli e variabili). Si noti che, in questi casi, non si parla pi`u
+di backtracking.
+6.5
+Strutture dei Problemi
+Come abbiamo visto si possono sfruttare i sottoproblemi per individuare delle soluzioni.
+Supponiamo che possiamo rompere un problema in dei sotto-problemi aventi un numero
+c di variabili (dove c `e ﬁssato). I sottoproblemi indipendenti possono essere identiﬁcati
+come delle componenti connesse del constraint graph. Per ciascuno di questi problemi,
+la soluzione nel caso peggiore ha complessit`a O(nc · n
+c ). Dunque, possiamo lavorare per
+ognuno di questi problemi in maniera separata.
+Tuttavia, spesso, non si hanno problemi ben separabili. Si possono avere delle strutture
+che non sono completamente separate... posso provare varie strategie per sempliﬁcare.
+Se ho delle strutture acicliche, il problema pu`o essere risolto forzando l’arc consistency
+e, con un costo di tipo quadratico O(n · d2) posso risolvere il problema che, nella forma
+generale, ha un costo di O(dn).
+41
+CONSTRAINT SATISFACTION PROBLEMS
+Quanto detto ﬁnora `e approccio che va bene, tuttavia `e particolarmente utile solo nel
+caso in cui le variabili siano binarie. Ci serve un approccio pi`u generale. Consideriamo il
+seguente problema, dove abbiamo un cruciverba.
+Supponiamo che ogni casella sia una variabile, ogni lettera `e un possibile valore e, dun-
+que, il dominio delle variabili coincide con l’alfabeto. Consideriamo di avere gi`a le parole
+candidate. Indichiamo con 1h = {Paris, Panda, Laura, Anita} le possibili prime parole
+orizzontali, con 1v = {Limbo, Lingo, Petra, Pampa, Peter} le possibili prime parole ver-
+ticali e cos`ı via. Vogliamo trovare un assegnamento di valori alle variabili che soddisfa i
+vincoli (ad esempio 1h deve essere compatibile con 1v). Dunque, i vincoli sono le deﬁni-
+zioni (1h, 1v, etc) e i valori possibili per questi vincoli sono le parole compatibili con la
+deﬁnizione.
+Un ipergrafo rappresenta meglio il problema. Come detto in precedenze, gli iper-rami sono
+degli insiemi di vertici/variabili. Come si rappresenta un CSP con un ipergrafo? Per ogni
+vincolo deﬁnisco un iperarco.
+Se utilizzassi una rappresentazione a grafo, le celle 1,2,3,4,5 sarebbero tutte collegate tra
+di loro ma non riuscirei a distinguere se sono collegati perch´e appartengono ad una unica
+deﬁnizione o perch´e appartengono a deﬁnizioni diverse che si incrociano tra di loro.
+42
+CONSTRAINT SATISFACTION PROBLEMS
+Possiamo dire che un ipergrafo `e aciclico se esiste un albero che lo rappresenta, il quale
+contiene tutti gli iperarchi. Cosa si pu`o dire del problema dell’omomorﬁsmo su strut-
+ture acicliche? In un problema di CSP, l’input `e costituito dalle due strutture relazio-
+nali A,B (vincoli e DB delle relazioni). Nel caso di strutture acicliche, la complessit`a
+`e O(||A|| · ||B|| · log ||B||). Come posso vederlo? Bisogna utilizzare un algoritmo di
+programmazione dinamica, ovvero l’algoritmo di Yannakaki. Consideriamo un esempio:
+Filtriamo verso l’alto. Scegliamo la relazione t e ﬁltriamo tutte le tuple di r che sono
+compatibili con le tuple di t. Terminato il ﬁltraggio, consideriamo la restante relazione si
+pi`u in basso non ancora selezionata, ovvero s e ﬁltriamo la relazione superiore, sempre r,
+in funzione di essa.
+Dunque, itero il procedimento ﬁnch´e non ho terminato il ﬁltraggio verso l’alto.
+43
+CONSTRAINT SATISFACTION PROBLEMS
+Possiamo dimostrare che se nessuna relazione si `e svuotata, esiste sicuramente una soluzio-
+ne. Dunque, il problema decisionale (se esiste la soluzione) `e gi`a terminato. D’altro canto,
+nelle relazioni all’ultimo livello potrebbero scomparire delle istanze. Dunque, l’algoritmo
+procede con una fase di ﬁltraggio a scendere, in modo da garantire che tutte le istanze che
+rimangono appartengono ad una soluzione.
+Quale `e il costo del ﬁltraggio? Basta ordinare i valori delle relazioni e fare una merge,
+dunque una singola operazione costa n · log n e, in totale, si fanno o operazioni, se o `e il
+numero dei vincoli.
+Una soluzione la possiamo calcolare in maniera semplice utilizzando un algoritmo di Back-
+tracking. Filtrando in maniera ottimale l’istanza, otteniamo una struttura struttura ﬁl-
+trata che permette di calcolare una soluzione in maniera Backtrack-free, ovvero privo
+appunto della fase di backtracking. Le soluzioni di un problema aciclico, in generale, pos-
+sono essere esponenziali ma ho un modo polinomiale che mi permetta di decidere se esiste
+una soluzione, un modo polinomiale che mi calcola la soluzione ed un modo polinomiale
+che mi calcola ogni altra soluzione.
+In realt`a, l’albero ﬁltrato che abbiamo ottenuto rappresenta implicitamente tutte le espo-
+nenziali soluzioni ed `e importante, poich´e muovendomi in questa struttura aciclica posso
+ottenere le soluzioni che mi interessano ed `e anche il modo pi`u e”ciente per rappresentarle
+in maniera compatta.
+44
+CONSTRAINT SATISFACTION PROBLEMS
+6.6
+Strutture quasi ad Albero di CSP
+Consideriamo un problema rappresentato con un grafo.
+Come possiamo renderla aciclica?
+Possiamo cancellare un nodo in modo da renderla
+aciclica. Se cancelliamo il nodo SA otteniamo una struttura aciclica.
+Il minimo numero di nodi da cancellare per rendere la struttura acilica `e deﬁnito come Cut
+Set o Feedback Vertex Number. Se riusciamo a rendere un grafo aciclico allora potrei
+sfruttare tutti i ragionamenti fatti in precedenza. Cancellare un nodo signiﬁca ﬁssare la
+variabile SA ad una costante e, naturalmente, le istanze dei vincoli del problema aciclico
+sono ottenute in modo da essere compatibili con la costante di SA. Dunque, risolvo il
+problema aciclico. Se trovo una soluzione allora ho ﬁnito altrimenti provo ad istanziare in
+maniera di!erente la variabile.
+Nel caso peggiore, il costo `e pari al dominio(SA) · costoP roblemaAciclico. Se il
+minimo numero di variabili da cancellare `e pari a c , tale problema si pu`o risolvere in
+O(dc · (n →c)d2). Tale complessit`a deriva dall’utilizzo dell’arc consistency... utilizzando
+l’approccio degli ipergraﬁottengo una complessit`a di!erente.
+Inoltre, utilizzando l’approccio degli ipergraﬁ, piuttosto che ﬁssare una singola variabile
+potrei ﬁssare un intero vincolo (iper-arco).
+45
+CONSTRAINT SATISFACTION PROBLEMS
+6.7
+Introduzione alla Tree Decomposition
+Rappresenta il miglior approccio per trasformare una struttura ciclica in una struttura
+aciclica. La sua idea `e di trovare un grafo di sotto-problemi.
+Ottengo una catena di sotto-problemi dove possiamo risolvere questi problemi in maniera
+indipendente e, dalla consistenza dei ”pezzi” in comune dei sottoproblemi, ottengo la
+soluzione del problema originale.
+In altre parole, possiamo vedere la struttura ciclica
+iniziale come un ipergrafo costituito da un iperarco per ogni sottoproblema.
+6.8
+Join-Tree
+Sia H = ({A, B, C, D, E}, {A, B, C}, {A, B, D}, {D, E}) un ipergrafo.
+Sia V’ l’insieme degli iperarchi di H.
+Possiamo dire che T = (V ↑, E↑) `e un Join-Tree di H se:
+↑p, q ↔V ↑: p ⇒q ′= ∋allora
+(6.4)
+↑x ↔p ⇒q,
+x occorre in ogni vertice di T nel path da p a q
+(6.5)
+Sostanzialmente, ogni variabile si propaga nell’albero e se scompare non posso ritrovarla
+pi`u avanti.
+46
+CONSTRAINT SATISFACTION PROBLEMS
+6.9
+IpergraﬁAciclici
+Possiamo dire che H `e un ipergrafo aciclico ↙⇑esso ha un join-tree.
+La deﬁnizione di un ipergrafo aciclico `e pi`u potente di quella di un grafo aciclico. Mentre un
+grafo aciclico `e un grafo senza cicli, in un ipergrafo avere dei cicli potrebbe non apportare
+problemi, quindi in alcuni casi si pu`o considerare aciclico.
+Decidere se un ipergrafo `e
+aciclico `e un problema log-space-completo ed `e trattabile in tempo lineare.
+La stessa
+complessit`a per i graﬁ.
+6.10
+Tree Decomposition
+Possiamo vederla come un modo per costruire un join-tree. Si parte da una struttura
+ciclica e la si divide in sotto-problemi aciclici per risolvere pi`u facilmente il problema.
+Cerchiamo un raggruppamento delle variabili tale da formare un ipergrafo aciclico.
+Sia k una costante. Cerchiamo insiemi di k + 1 variabili che formino gli iperarchi di un
+ipergrafo aciclico.
+Sia G = (V, E) un grafo.
+Sia T = (N, A) un albero.
+Sia ϖ : N ↘2V una funzione che associa vertici con insiemi di variabili.
+Allora, (T, ϖ) `e una tree decomposition di G se:
+1. ↑e ↔E, esiste un vertice v ↔N : e ∈ϖ(v)
+2. ↑v1, x2 ↔N,
+↑x ↔ϖ(v1) ⇒ϖ(v2),
+x occorre in ogni ϖ-label (insieme di ver-
+tici) nel path da v1 a v2.
+Si noti che, nell’esempio precedente, si ha che ϖ(v1) = {A, B, C}, ϖ(v2) = {A, B, D}
+e ϖ(v3) = {D, E}. Inoltre, la seconda propriet`a `e deﬁnita come propriet`a di connes-
+sione.
+Deﬁniamo width di T, ϖ `e pari a max
+v↓N {|ϖ(V )| →1}. Essa `e una misura della di”colt`a
+di decomposizione ed `e pari al massimo numero di variabili nei nodi del joint tree meno
+uno. La tree-width del grafo G `e la minima width tra tutte le possibili decomposizioni
+di G.
+6.10.1
+Teorema
+Sia k una costante.
+Calcolare una tree-decomposition di width minore o uguale di k
+richiede tempo lineare. Se k non `e ﬁssato (`e parte dell’input) il problema `e NP-Hard.
+47
+CONSTRAINT SATISFACTION PROBLEMS
+6.11
+Altre Considerazioni sulla Tree Decomposition
+Riprendiamo l’esempio precedente.
+Esso presenta le seguenti relazioni:
+Possiamo dire che ϖ(v1) = {A, B, C}, ϖ(v2) = {A, B, D} e ϖ(v3) = {D, E}.
+Inoltre, si ha che width(< T, ϖ >) = 3 →1 = 2.
+Costruire questa tree decomposition `e come individuare un iper-grafo aciclico di cui ab-
+biamo il joint tree. L’ipergrafo aciclico `e quell’ipergrafo dove i nodi del joint tree sono
+iperarchi... vediamo {A, B, C}, {A, B, D} e {D, E} come se fossero 3 di!erenti vincoli.
+L’esistenza della Tree Decomposition mi pu`o guidare a capire quali sottoproblemi del
+problema ciclico risolvere per soddisfare un problema di CSP che per`o `e aciclico. Vediamo
+come fare proseguendo nell’esempio.
+48
+CONSTRAINT SATISFACTION PROBLEMS
+Vogliamo risolvere il seguente sottoproblema:
+Posso vedere {A, B, C} come un unico vincolo, cos`ı come anche gli altri iperarchi nei
+relativi sottoproblemi. Risolvendo i 3 sottoproblemi ottenendo 3 di!erenti relazioni, se
+le combino ottengo un problema aciclico. In ogni caso, vediamo come risolvere l’attuale
+sottoproblema.
+Per risolvere questo problema potrei utilizzare solamenti i relativi 3 vincoli del problema
+originario, ovvero r1(A, B), r2(B, C) e r3(C, A), ignorando tutti gli altri. Dunque,
+ottengo tutti i valori compatibili con questi 3 vincoli. Esiste un modo pi`u semplice.
+Vado a calcolarmi tutte le possibili combinazioni di valori per {A, B, C} e costruisco un
+nuovo vincolo che le contiene. Dunque, otteniamo il seguente vincolo:
+Questo vincolo non `e restrittivo, siccome contiene tutte le combinazioni originali. Dunque,
+introducendo questo vincolo il sottoproblema non cambia.
+Facendo la stessa cosa anche per i sottoproblemi legati ad {A, B, D}, {D, E} e combinan-
+do i risultati ottenuti (anche assieme al precedente) otteniamo un ipergrafo con associato
+il seguente join tree:
+49
+CONSTRAINT SATISFACTION PROBLEMS
+Possiamo subito notare l’aciclicit`a. A questo punto, siccome questa struttura ha le stesse
+soluzioni delle precedenti siccome abbiamo aggiunto dei vincoli non restrittivi, possiamo
+ﬁltrare sia bottom-up che top-down. In questo modo, abbiamo ottenuto una istanza che
+`e localmente consistente.
+Facciamo qualche osservazione:
+Siccome le relazioni non si sono svuotate, esiste almeno una soluzione;
+Tutte le tuple rimaste appartengono a qualche soluzione, quindi con un algoritmo
+di backtracking posso generarle tutte (sebbene esso non pu`o fallire, dunque non vi `e
+alcuna fase di backtrack).
+Sostanzialmente, la local consistency coincide con la arc consistency, mentre il secon-
+do punto di cui sopra rappresenta la global consistency. Dunque, abbiamo visto che
+forzando la local consistency otteniamo la global consistency. Difatti, esiste un teorema
+che a!erma che, su istanze acicliche, la prima implica la seconda.
+Si noti che, come detto qualche pagina fa, possiamo contare le soluzioni in tempo polino-
+miale (senza generarle tutte), sulla base del join tree ottenuto.
+Data un Tree Decomposition con width k, quanto costa risolvere questo problema?
+Abbiamo calcolato dei nuovi vincoli che contenevano al massimo k + 1 variabili, quindi
+abbiamo considerato tutte le combinazioni di tutti i valori del dominio, dunque `e costato
+Dk+1 per ogni vincolo. Nel caso peggiore, si pu`o dimostrare che ogni nodo deve di!erire
+da un altro per almeno una variabile, dunque al massimo abbiamo un numero di nodi
+pari al numero di variabili.
+Supponiamo di avere n variabili e m constraint, la Tree
+Decomposition avr`a al pi`u n vertici in T . Dunque, il costo di costruzione dei nuovi vincoli
+`e, nel caso peggiore, pari a O(n · Dk+1). Quanto costa risolvere il problema con la nuova
+struttura aciclica? Siccome calcolare la compatibilit`a tra due relazione `e pari a fare una
+natural join tra le due e se ordino costa n log n se n `e il numero di tuple, siccome la
+dimensione di ogni vincolo `e pari a Dk+1, il costo sarebbe Dk+1 log Dk+1 e siccome
+esso va ripetuto per ogni vincolo nuovo (quindi n →1 ripetuto due volte - top-down e
+bottom-up) e vecchio (ovvero pari a m, anche in questo caso per due volte).
+Dunque, otteniamo che il costo `e:
+O((Dk+1 + log Dk+1) · (n + m))
+(6.6)
+Con k ﬁssato esso `e polinomiale.
+In conclusione, abbiamo dimostrato che ogni classe di istanze di CSP della forma (C, DB)
+con tw(C) ↓k `e feasible in tempo polinomiale, dove tw `e la tree-width limitata da un
+k ﬁssato.
+50
+CONSTRAINT SATISFACTION PROBLEMS
+6.12
+Teorema di Grohe
+Sia S una classe ricorsivamente enumerabile di strutture relazionali di arit`a ﬁssata.
+Denotiamo con CSP (S, →) un problema di CSP (dove non vi `e alcuna limitazione sul
+DB) deﬁnito come segue:
+data una struttura C ↔S e una struttura DB con la stessa signature, il problema
+decide se I = (C, DB) `e una istanza del problema CSP che ha una soluzione.
+Siano Sk le strutture con tw ↓k. Prima abbiamo visto che CSP (Sk, →) ↔P T IME,
+ora enunciamo un teorema pi`u forte.
+6.12.1
+Enunciato del Teorema
+CSP (S, →) ↔P T IME
+↑↓
+il core delle strutture in S ha tw ﬁssata.
+6.12.1.1
+Dimostrazione △
+Sia S una classe di problemi CSP per cui valgono le ipotesi fatte. Il core delle strutture
+in S ha una tw quindi esiste un numero naturale k tale che la limita.
+Allora esiste un algoritmo Algk che risolve ogni istanza I↑= (C
+↑, DB) con C
+↑↔S
+deﬁnita come segue.
+Sia C un core di C
+↑e consideriamo l’istanza equivalente (C, DB). Per ipotesi, si ha che
+tw(G(G(C))) ↓k.
+Sia n il numero di variabili, m = |C| il numero di vincoli e d il numero di valori distinti
+nel DB. L’algoritmo, per ogni insieme di k + 1 variabili, deﬁnisce un nuovo vincolo su di
+esse con tutte le loro possibili combinazioni di valori.
+Consideriamo la nuova istanza Ca, DBa che contiene tutte gli O(nk+1) nuovi vincoli,
+oltre agli m vincoli originali. Ciascuna di queste relazioni nel DB contiene al massimo
+dk+1 tuple.
+A questo punto forziamo la local consistency rimuovendo le tuple non compatibile per
+ogni coppia di vincoli, ﬁnch´e non si pu`o eliminare pi`u alcuna tupla. Se nessuna relazione
+`e vuota allora abbiamo trovato una soluzione altrimenti no.
+51
+CONSTRAINT SATISFACTION PROBLEMS
+Si noti che il costo, nel caso peggiore. `e pari a:
+O(dk+1 · (nk+1)2 · dk+1 · log dk+1)
+(6.7)
+Dove:
+dk+1 `e il numero di ripetizioni;
+(nk+1)2 `e il numero di coppie di vincoli;
+dk+1 · log dk+1 `e il costo di ﬁltrare ogni coppia di vincoli;
+In ogni caso, possiamo esprimere il costo anche come:
+O(d2k+2 · n2k+2 · log d)
+(6.8)
+Si noti che non calcoliamo n´e il core n´e la tree-decomposition.
+52
+Capitolo 7
+Planning
+Il Planning ha come scopo quello di pianiﬁcare le azioni da svolgere per raggiungere un
+certo goal.
+Dal punto di vista della formalizzazione abbiamo uno State Transition
+System # = (S, A, E, ϱ):
+S `e un insieme di stati.
+A `e un insieme di azioni.
+E `e un insieme di eventi esogeni (non controllati da noi, non modellati dal sistema).
+ϱ `e la funzione di transizione di stato che, dato uno stato e data una azione/even-
+to, restituisce il prossimo stato. Tale funzione `e deﬁnita come ϱ : S ▽(A ⇓E) ↘S
+oppure come ϱ : S ▽(A ⇓E) ↘2S, dove 2S `e l’insieme degli stati e in questo casi
+si parla di sistemi non deterministici.
+Quando vi sono pi`u sistemi, per evitare ambiguit`a si possono usare S!, A!, E!, ϱ!.
+Di seguito viene mostrato un esempio di piano:
+53
+Planning
+Di seguito viene mostrato un modello concettuale di un problema di planning.
+Il Planner riceve uno stato iniziale, alcuni vincoli, un obiettivo e una descrizione della
+realt`a di interesse, ovvero #. Il planner deﬁnisce dei piani (sequenze di azioni) che passa
+ad un controller che li attua.
+Il controller, sulla base delle osservazioni che riceve (il
+sistema `e osservabile/parzialmente osservabile) procede a dare ulteriori azioni. Il planner
+poi riceve lo stato dell’esecuzione ed eventualmente invia ulteriori piani al controller.
+Il Planner pu`o lavorare o#ine (deﬁnendo sin dal principio tutto quello che bisogna fare)
+oppure pu`o lavorare in maniera dinamica, cambiando i piani a seconda di quello che
+succede (se le azioni falliscono o, in generale, sono non deterministiche).
+I problemi di planning sono simili ai problemi di scheduling: in quest’ultimi abbiamo
+un insieme di azioni deﬁnite con dei time constraint e dei vincoli di precedenza... tale
+problema `e NP-Completo. Nel planning bisogna decidere quali azioni e task eseguire. Nel
+caso del planning le complessit`a possono essere varie: tipicamente dell’ordine di P-SPACE,
+ben sopra P, oppure potremmo avere anche problemi indecidibile se inseriamo nel sistema
+dei simboli di funzione, che ci permettono di comporre in maniera arbitraria quello che
+succede.
+Esistono tre tipi di planner:
+Domain-Speciﬁc:
+sono tagliati per uno speciﬁco dominio di planning;
+Domain-independent: dovrebbero funzionare in qualsiasi dominio di planning,
+sono generali;
+Conﬁgurable: abbiamo un planning engine generale dove agiamo pesantemente
+sulle conﬁgurazioni incorporando conoscenze del dominio, in modo che tali algoritmi
+generali siano pi`u e”cienti. E’ una via di mezzo tra i precedenti.
+54
+Planning
+7.1
+Classical Planning
+Si assume che abbiamo un insieme ﬁnito di stati, di azioni e di eventi e che il sistema
+sia completamente osservabile, deterministico e senza eventi esogeni. Inoltre, si suppone
+anche che abbiamo un insiemi di stati goal e di disporre di un piano sequenziale (non
+parallelo) mentre il tempo viene gestito secondo una logica implicita, ovvero le azioni sono
+istantanee (come se non avessero durata). Inoltre, il planner lavora o#ine: non conosce
+lo stato dell’esecuzione.
+Nel Classical Planning si ha un problema P = (#, s0, Sg) dove s0 `e lo stato iniziale e Sg
+`e l’insieme di goal. Bisogna trovare una sequenza di azioni (a1, ..., an) che produce una
+sequenza di transizioni di stato (s1, ..., sn) tale che sn = Sg. Sostanzialmente, il nostro
+problema `e un problema di ricerca di un path in un grafo, dove i nodi sono gli stati e gli
+archi sono le azioni.
+Quale `e il problema?
+Se abbiamo 5 location, 3 robot, 100 container e 3 pedane allora avremmo 10277 stati,
+laddove il numero di particelle nell’universo `e dell’ordine di 1087.
+I planner pi`u utilizzati sono quelli di tipi conﬁgurable: un planner domain-speciﬁc potreb-
+be essere in grado di individuare direttamente una soluzione laddove un planner domain-
+indipendent potrebbe esplorare path alternativi. Siccome non possiamo/vogliamo scrive-
+re un nuovo planner per ogni dominio, utilizzare i planner conﬁgurabili rappresenta la
+soluzione migliore.
+In generale, un problema di Planning consta di 4 fasi:
+Modellazione
+Planning AI
+Behavior Trees
+ROS
+Nella pratica, non deﬁnisco un solo piano ma anche dei piani che possono essere necessari in
+un certo momenti per garantire una sorta di sicurezza qualora si ﬁnisce in una circostanza
+non considerata.
+55
+Planning
+7.2
+Classical Representation
+Utilizziamo la logica (tipicamente del primo ordine) per rappresentare tutto quello che ci
+serve. Abbiamo un numero ﬁnito di simboli di predicati e di costanti e non utilizziamo
+simboli di funzione.
+Dunque, abbiamo un insieme di atomi che rappresentano tutto
+quello che ci interessa: un atomo rappresenta tutto quello che `e vero nella nostra realt`a di
+interesse.
+Un atomo top(pallet,p) `e composto da un simbolo di predicato, (top), da una arit`a (2)
+e al suo interno contiene o costanti oppure variabili (pallet, p). Questi sono gli elementi di
+base che si utilizzano nelle formule. Gli atomi possono essere combinati con operatori logici
+(⇒, ⇓, ...) e quantiﬁcatori (↑, ⇔). Nella versione base della logica classica si utilizzano solo
+atomi e connettivi logici.
+Utilizziamo questa rappresentazione sia per le cose ﬁsse (che non cambiano) sia per rappre-
+sentare relazioni dinamiche (che cambiano mentre il sistema evolve) che nella terminologia
+del planning prendono il nome di ﬂuent. Si noti che un atomo pu`o essere solamente vero
+o falso.
+Introduciamo qualche concetto:
+Quando un atomo non sono possiede variabili, prende il nome di ground expres-
+sion: `e un fatto.
+Una unground expression `e una espressione che contiene almeno una variabile e
+che.
+Il grounding `e il processo con il quale passiamo da una unground expression ad
+una ground expression.
+Una sostituzione ς `e un mapping che associa un valore ad ogni variabile.
+Tipicamente, un term `e un valore costante ma, in contesti pi`u generali, anche il
+simbolo di una funzione.
+Uno stato `e un insieme di atomi ground che rappresentano la realt`a in quel momento.
+Vediamo un esempio:
+56
+Planning
+Gli operatori sono costituiti da una tripla o=(name(o), preconditions(o), e”ec-
+ts(o)):
+preconditions(o): sono delle formule oppure, semplicemente, degli insiemi di atomi
+che devono esseri veri per poter utilizzare questo operatori;
+e”ects(o): rappresentano ci`o che succede quando utilizziamo quell’operatore;
+name(o): identiﬁca l’operatore ed ha la forma n(x1, ..., xn) dove n `e il simbolo
+dell’operatore (che deve essere unico) e x1, ..., xn sono tutte i simboli di variabile
+che appaiono nelle istanze di o.
+Ad esempio:
+Una azione `e una ground istance (mediante sostituzione) di un operatore. Ad esempio:
+Per quanto riguarda la notazione, indichiamo con:
+S+ gli atomi che appaiono positivamente in S.
+S↔gli atomi che appaiono negativamente in S.
+Sia a un operatore o una azione, allora:
+precond+(a) rappresenta l’insieme di atomi che appaiono positivamente nelle pre-
+condizioni di a.
+precond↔(a) rappresenta l’insieme di atomi che appaiono negativamente nelle pre-
+condizioni di a.
+e”ects+(a) rappresenta l’insieme di atomi che appaiono positivamente negli e!etti
+di a.
+e”ects↔(a) rappresenta l’insieme di atomi che appaiono negativamente negli e!etti
+di a.
+57
+Planning
+Formalmente, possiamo dire che un’azione a `e applicabile in uno stato s se s soddisfa la
+precondizione di a o, pi`u formalmente, se:
+precond+(a) ∈s, ovvero se l’insieme dei letterali positivi `e incluso nello stato;
+precond↔(a) ⇒s = ∋, ovvero nessun letterale negativo si trova nello stato.
+Un dominio di planning `e costituito da un insieme di operatori.
+Una piano `e una sequenza di azioni φ = (a1, ..., an) tale per cui ogni ai `e una istanza
+di un operatore in O.
+Possiamo dire che φ `e una soluzione per P = (O, s0, Sg) se `e eseguibile ed il suo risultato
+`e uno/lo stato Sg o, in altri termini, se vi sono degli stati s0, s1, ..., sn tali per cui
+ϱ(s0, a1) = s1, ϱ(s1, a2) = s2, ... ϱ(sn↔1, an) = sn e sn soddisfa Sg.
+Si noti che si possono avere delle soluzioni ridondanti (dunque il vero problema consiste
+nel trovare delle soluzioni non ridondanti, quindi pi`u brevi). Per risolvere questo problema
+posso usare la rappresentazione Set-Theoretic dove trasformo ogni atomo ground in una
+variabile proposizionale (dunque lavoro con la rappresentazione classica ristretta alla logica
+proposizionale), che pu`o essere vera o falsa. Non ho pi`u una rappresentazione ad atomo
+(che rappresenta una sorta di relazione).
+Utilizzando questo approccio sicuramente occuperemmo una quantit`a molto pi`u grande
+di spazio. Se vi `e un operatore con arit`a k e vi sono costanti posso avere ck ground
+instances di o, quindi ck set-theoretic actions.
+Pu`o avere senso fare questa cosa quando voglio utilizzare dei sistemi gi`a pronti che lavo-
+rano con la soddisfacibilit`a di formule logiche ed operano solo con sistemi aventi variabili
+booleane.
+Una alternativa consiste nell’utilizzare la rappresentazione state-variable dove si utiliz-
+zano gli atomi per le propriet`a che non cambiano e si utilizzano dei valori per le propriet`a
+che cambiano piuttosto che degli atomi booleani, ad esempio top(p1) = c3.
+58
+Planning
+7.3
+State-Space Planning
+Nello state-space planning, ogni nodo rappresenta lo stato del mondo e un piano `e un
+percorso nello spazio mentre nel plan-space planning ogni nodo `e un piano parziale
+avente anche alcuni constraint.
+Spesso i risolutori di questi problemi si appoggiano anche ad altre tecniche, tipo questi
+problemi possono essere mappati in CSP per sfruttare i loro risolutori o possono essere
+trasformati in formule proposizionali SAT per sfruttare i relativi risolutori, che sono molto
+e”cienti.
+Esistono vari approcci per risolvere un problema di state-space planning.
+7.3.1
+Forward Search
+Abbiamo lo stato iniziale, il goal e facciamo una ricerca all’interno del grafo dei possibili
+stati, che viene generato dinamicamente.
+Di seguito viene riportato l’algoritmo.
+Si parte dallo stato iniziale e si va in avanti. Si parte con il piano vuoto e se lo stato soddisfa
+il goal abbiamo ﬁnito. Ad ogni passo, considero l’insieme delle azioni applicabili (istanza
+ground di un operatore in O dove sono rispettate le sue precondizioni). Se non ho alcuna
+azione restituisco fallimento altrimenti scelgo non deterministicamente un azione e lo stato
+che ottengo sar`a quello ottenuto in seguito all’esecuzione dell’azione scelta, naturalmente
+aggiungo l’azione al piano. Dunque, risulta cruciale scegliere l’azione migliore e, per farlo,
+si possono utilizzare delle euristiche.
+La forward-search `e sound (corretta), poich´e ogni piano ritornato `e una soluzione, ed `e
+complete, poich´e se esiste una soluzione la troviamo.
+59
+Planning
+Se ho una macchina non deterministica valgono queste propriet`a ma i nostri computer
+sono deterministici, dunque come possiamo implementare l’algoritmo?
+Possiamo utilizzare delle ricerche quali BFS, DFS, Best-First, Greedy, A→, etc. Se utilizzo
+delle tecniche euristiche posso perdere la completezza. Se utilizziamo una DFS possiamo
+renderla completa evitando di visitare ripetutamente gli stessi nodi.
+Tipicamente, si possono avere tantissime azioni applicabili, dunque il branching factor della
+forward search `e molto elevato e pu`o comprendere delle azioni che non sono realmente utili.
+Bisogna utilizzare una buona euristica.
+7.3.2
+Backward Search
+Si parte dal goal e andiamo a calcolare una sorta di funzione inversa della funzione di
+transizione ϱ(g, a), ovvero ϱ↔1(g, a). Prima di deﬁnire questa nuova funzione, bisogna
+deﬁnire quali azioni sono rilevanti.
+Un azione a `e rilevante per un goal g se:
+a rende almeno uno dei letterali del goal vero. In altri termini, se:
+g ⇒e”ects(a) ′= ∋
+(7.1)
+a non deve rendere falso nessuno dei letterali di g o, in altri termini, se
+g+ ⇒e”ects↔(a) = ∋
+e
+g↔⇒e”ects+(a) = ∋
+(7.2)
+A questo punto possiamo dire che, se a `e rilevante per g, posso deﬁnire l’inversa della
+funzione di transizione, ovvero:
+ϱ↔1(g, a) = (g →e”ects(a)) ⇓precond(a)
+(7.3)
+Quindi, partendo dal vero goal, l’inversa di questa funzione di transizione mi fornisce dei
+nuovi (ﬁnti) goal da raggiungere.
+Di seguito viene riportato l’algoritmo:
+60
+Planning
+Si noti che, in questo caso, le azioni vengono aggiunte al piano in testa, non in coda.
+Anche questo algoritmo pu`o avere un grande branching factor.
+7.3.3
+Lifting
+E’ una tecnica teoricamente utile, a di!erenza delle precedenti. Le azioni sono deﬁnite
+utilizzando le variabili e non `e utilizzare delle azioni totalmente ground. Dunque, non `e
+detto che siamo costretti a deﬁnire ogni cosa nel minimo dettaglio.
+Deﬁnisco il minimo possibile e mi tengo le variabili dove `e possibile. Se evito di sostituire
+le costanti alle variabili e, quindi, di esplodere tutte le possibili istanze di un predicato
+ﬁnch´e non sono costretto a farlo, in generale avr`o meno roba da considerare riducendo il
+branching factor.
+Di seguito viene mostrata la versione lifted della backward search.
+E’ molto simile alla precedente con la di!erenza che l’insieme delle azioni possibili Si noti
+che il maximum general uniﬁer `e l’uniﬁcazione pi`u generale possibile dell’operatore (se
+posso uniﬁcare una variabile con un’altra variabile lo faccio, altrimenti uniﬁco con una
+costante).
+Nonostante riduce di molto lo spazio di ricerca rispetto ai precedenti, lo spazio generato
+da questo algoritmo `e comunque molto grande. E’ necessario tagliare lo spazio di ricerca.
+61
+Planning
+7.3.4
+STRIPS
+STRIPS `e un algoritmo che ci permette di risolvere separatamente i vari goal possibili,
+ignorando le loro interdipendenze.
+Se i goal sono serializzabili (possono essere risolti
+secondo un ordine lineare) questo approccio va bene.
+Dunque, questo metodo non `e
+completo.
+Di seguito viene mostrato la versione backward dell’algoritmo (esiste anche la forward).
+In alcuni casi questo algoritmo non funziona, come con l’anomalia di Sussman.
+Se cerchiamo di risolvere separatamente il goal A su B e il goal B su C otteniamo un
+fallimento poich´e la risoluzione di uno rompe l’altro.
+Per risolvere questi problemi posso utilizzare algoritmi di!erenti oppure utilizzare algoritmi
+domain-speciﬁc.
+7.4
+Tecniche Planning-Graph
+Uno dei problemi principali del planning `e il branching factor che `e troppo elevato. Per
+risolvere questa problematica possiamo deﬁnire un problema rilassati (facili da risolvere,
+idealmente in tempo polinomiale) le cui soluzioni (siccome `e rilassato) includono le solu-
+zioni del problema originario ed altre che non risolvono il problema originario (soluzioni
+che non tengono conto dei vincoli originari che abbiamo rilassato). Tale algoritmo prende
+il nome di Graphplan.
+62
+Planning
+Posso restringere lo spazio di ricerca per includere le azioni che occorrono veramente nelle
+soluzioni. Dunque, ho una fase in cui rilasso il problema ed una seconda fase pi`u completa,
+che mi permette di ﬁltrare molto il grafo completo.
+Come funziona?
+Partendo da k = 0, nella fase di Graph expansion creo un planning graph che contiene
+k livelli. Veriﬁco se il planning graph soddisfa le condizioni necessarie per l’esistenza del
+piano e se non le soddisfa incremento il k e ripeto. Se ho successo, proseguo con la fase di
+solution extraction: faccio backward search modiﬁcata per considerare solo le azioni in
+questo planning graph (ovvero il problema rilassato, il quale restringe le azioni possibili).
+Dunque utilizzo tecniche simili alle precedenti in uno spazio di ricerca molto pi`u piccolo.
+Come `e deﬁnito il planning graph?
+Abbiamo nodi di tipo azione e nodi di tipo stato.
+Si alternano livelli di azioni e di stato:
+Nodi al livello-azione i: contengono le azioni che potremmo eseguire al tempo i;
+Nodi al livello-stato i: contengono i letterali che potrebbero essere veri al livello
+i;
+Archi: rappresentano precondizioni ed e!etti.
+Inoltre esistono delle azioni ﬁttizie, dette maintenance/frame action, che mantengono
+lo stato nella stessa condizione.
+Le azioni possono avere delle relazioni particolari tra di loro:
+Due azioni allo stesso livello-azione sono mutualmente esclusive se:
+63
+Planning
+Inconsistent e”ects: l’e!etto di una nega l’e!etto dell’altra;
+Interference: una elimina la precondizione dell’altra;
+Competing needs: hanno delle precondizioni mutualmente esclusive.
+Se non si veriﬁca nessuno di questi casi, le due azioni non interferiscono tra di loro e
+potrebbe apparire entrambe nella soluzione di un piano.
+Inoltre, due letterali allo stesso state-level sono mutualmente esclusivi se vi `e inconsistent
+support: uno `e la negazione dell’altro o se tutte le azioni per ottenerli sono mutualmente
+esclusive.
+Questi vincoli ci permettono di ﬁltrare molto le azioni a disposizione. Infatti, nell’algoritmo
+si considerano tutte le azioni del livello successivo le cui precondizioni sono soddisfatte e
+non sono mutualmente esclusive con lo stato del livello precedente.
+64
+Capitolo 8
+Teoria dei Giochi
+La Teoria dei Giochi serve a modellare una serie di situazioni in cui degli agenti si trovano
+ad interagire, dove gli agenti possono essere umani o artiﬁciali. Nel momento in cui degli
+agenti interagiscono, si possono veriﬁcare di!erenti situazione: possono contrattare, essere
+in competizione o collaborare, perlomeno ciascuno in funzione dei propri obiettivi.
+I giochi hanno molte applicazioni: quelli strategici riguardano delle situazioni dove i
+giocatori hanno degli obiettivi da raggiungere e provano a raggiungerli utilizzando deter-
+minate strategie... spesso sono in competizione tra di loro. Una tipica applicazione la si
+vede nelle competizione politica. Le azioni compiute possono perdurare nel tempo e le
+strategie tengono conto di tutto quelle che succede... in questo caso si parla di giochi
+estensivi, come ad esempio la contrattazione e il commercio.
+I giochi possono anche
+ripetersi nel tempo e, dunque, una stessa situazione pu`o capitare pi`u volte e le strategie
+tengono conto di questa dinamica... in questo casi si parla di giochi ripetitivi e questi
+giochi sono stati utilizzati per studiare l’evoluzione umana (predatore/preda etc). I giochi
+cooperativi permettono di studiare tante dinamiche che avvengono nella societ`a, laddove
+cooperare pu`o fornire dei vantaggi... essi sono stati utilizzati nella teoria politica dei voti.
+Una caratteristica particolare dei giochi riguarda la presenza di informazione perfetta
+o imperfetta: se i player hanno piena osservabilit`a di ci`o che succede. Oppure, si pu`o
+parlare di informazione completa o incompleta che riguarda il conoscere le preferenze
+degli avversari. Un altro problema riguarda il mechanism design: si progettano le regole
+del gioco a cui gli altri giocatori devono sottostare, in maniera da massimizzare il proprio
+obiettivo (come nelle aste).
+65
+TEORIA DEI GIOCHI
+8.1
+Giochi Coalizionali
+Sono dei giochi cooperativi nei quali gli agenti cooperano tra di loro: per loro `e vantaggioso
+lavorare assieme. Nei giochi coalizionali ottengo un certo beneﬁcio, detto worth in base
+alla coalizione di cui faccio parte. Dunque, ogni gruppo di agenti pu`o ambire ad ottenere
+un certo risultato.
+I giocatori possono essere qualsiasi cosa: persone, aziende, partiti
+politici etc.
+Il nostro obiettivo `e calcolare una solution concept: indica quanto assegnare a ciascun
+giocatore in maniera da veriﬁcare certe propriet`a desiderabili. Naturalmente, le propriet`a
+devono essere tali da soddisfare degli agenti (che tipicamente si suppone siano razionali).
+Deﬁniamo formalmente il problema.
+Abbiamo un insieme di N giocatori chiamato grand coalition che include tutti i giocatori.
+Abbiamo una funzione v(s) deﬁnita su 2N che restituisce, per ogni possibile sottoinsieme
+s ∈N di giocatori, la sua worth (quanto possono ottenere i giocatori della coalizione s
+se collaborano tra di loro). In realt`a il suo signiﬁcato cambia a seconda del gioco (magari
+pu`o indicare anche il valore che i giocatori pensano di meritare).
+La ricchezza totale del gioco `e pari a v(N), dunque si assume che non si pu`o avere una
+ricchezza maggiore. Il meccanismo che invento distribuisce questa ricchezza.
+Le due domande fondamentali a cui la teoria dei giochi coalizionali deve rispondere sono
+le seguenti: che coalizione devo formare? Una coalizione come dovrebbe dividere la sua
+ricchezza tra i membri? Nella teoria dei giochi classica, l’obiettivo `e che tutti i giocatori
+collaborino: vogliamo che si formi la grand coalition.I beneﬁci che distribuiscono tengono
+conto di quanto un agente riceverebbe se giocasse nelle singole coalizioni, assumendo per`o
+che siamo riusciti a formare una grand coalition. Naturalmente, bisogna essere fair nella
+distribuzione, altrimenti vi potrebbero essere dei ”tradimenti” da parte di alcuni agenti.
+L’assunzione base che si fa in questo modello `e quella dei giochi a transferable utility:
+la ricchezza v(N) disponibile (l’utilit`a) pu`o essere distribuita come si vuole.
+Questa
+assunzione vale laddove abbiamo dei soldi ma se le cose da distribuire sono degli oggetti
+(tipo case) o, comunque, non sono completamente distribuili (come anche i numeri interi)
+tale assunzione non vale e si parla di giochi NTU (Non Trasferable Utility) dove
+la funzione v non `e un numero ma un insieme di oggetti ed entra in gioco il calcolo
+combinatorio.
+Nel nostro caso, assumiamo che la ricchezza sia monetizzabile e, dunque, posso utilizzare
+l’assunzione di cui sopra.
+66
+TEORIA DEI GIOCHI
+Formalmente, un gioco `e una coppia G =< N, v > con v : 2N ↘R.
+Un outcome `e un assegnamento di valori ad ogni giocatore e tutti i possibili insiemi di
+valori che posso distribuire deﬁnisce l’imputation set X(G). Pi`u formalmente, esso `e
+un insieme di vettori x = (x1, ..., xn) ↔X(G) dove xi `e il valore che diamo all’agente i.
+Inoltre, denotiamo con X(S) la somma dei valori dei giocatori nell’insieme S, ovvero
+X(S) = $
+i↓S xi.
+Una imputazione x per essere considerato ammissibile (potenziale soluzione) deve soddi-
+sfare:
+E$ciency: la somma di tutti i valori che sto assegnando deve essere uguale a v(N)
+o, pi`u formalmente, x(N) = v(N).
+Individual Rationality: il valore di ogni giocatore deve essere maggiore uguale di
+quello che otterrebbe giocando da solo o, pi`u formalmente, xi ↖v({i}), ↑i ↔N.
+Genericamente, le solution concepts devono essere caratterizzate in termini di fairness e
+stability (i giocatori non hanno incentivi a violare/abbandonare il gioco, non collaborando
+con tutti).
+Consideriamo un esempio.
+Abbiamo un gioco dove vi sono alcuni giocatori che si trovano in una rete.
+Tale grafo codiﬁca una worth function: se i giocatori in S formano un sottografo con-
+nesso, la loro ricchezza sar`a pari a 9 meno i costi degli archi della componente connessa.
+Immaginiamo che v(N) = 4, che `e il massimo valore.
+Come possiamo distribuire tale ricchezza?
+E’ necessario deﬁnire una funzione di eccesso e(S, X) = v(S) →x(S) che misura
+l’insoddisfazione della coalizione S. Ad esempio, la coalizione {F, P, R, M} ha eccesso 0
+mentre la coalizione {F, P, R, M} ha eccesso 3, siccome gli stiamo proponendo 0.
+67
+TEORIA DEI GIOCHI
+8.1.1
+Caratteristiche dei Giochi Coalizionali
+Giochi Superadditivi: per ogni coppia di coalizioni S, T che non hanno interse-
+zione, la worth che ottengono assieme `e maggiore o uguale della somma delle singole
+worth.
+↑S, T ∞N,
+se S ⇒T = ∋,
+allora v(S ⇓T ) ↖v(S) + v(T )
+(8.1)
+In questi casi conviene collaborare.
+Chiaramente la grand coalition ha il payo!
+massimo.
+Giochi Additivi: non ho un beneﬁcio aggiunto derivante dal coalizzarmi.
+↑S, T ∞N,
+se S ⇒T = ∋,
+allora v(S ⇓T ) = v(S) + v(T )
+(8.2)
+Giochi a Somma Costante: la worth della coalizione sommata alla worth di coloro
+fuori dalla coalizione, `e pari a v(N).
+↑S ∞N,
+allora v(S) + v(N\S) = v(N)
+(8.3)
+Giochi Convessi: la ricchezza di due coalizioni assieme `e pari alla loro singola
+ricchezza meno la loro intersezione.
+↑S, T ∞N,
+v(S ⇓T ) ↖v(S) + v(T ) →v(S ⇒T )
+(8.4)
+Giochi Semplici: la ricchezza o `e pari ad 1 o `e nulla. Un tipico esempio sono le
+situazioni di voto.
+↑S ↔N,
+v(S) ↔{0, 1}
+(8.5)
+Quando i giochi semplici sono anche giochi a somma costante, si parla di proper
+simple games.
+Tutte queste caratteristiche si intrecciano tra di loro:
+68
+TEORIA DEI GIOCHI
+8.1.2
+Esempio 1
+Supponiamo di avere tre giocatori {A, B, C} dove:
+v(A) = v(B) = v(C) = 0;
+v({A, B}) = 20;
+v({A, C}) = 30;
+v({B, C}) = 40;
+v({A, B, C}) = 42.
+Se consideriamo la seguente imputazione x = [4, 14, 24], notiamo che `e e”ciente (distri-
+buisce tutta la ricchezza) inoltre tutti prendono una quantit`a non nulla (soddisfa il princi-
+pio di invidual rationality). Possiamo notare che A,B sono scontenti, poich´e pretendono
+20 ma ne prendono 18 e cos`ı anche gli altri.
+Siccome il gioco `e ad utilit`a trasferibile, potremmo risolvere un sistema lineare.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+xa + xb ↖20
+xb + xc ↖40
+xa + xc ↖30
+xa + xb + xc = 42
+(8.6)
+Sempliﬁcando otterremo, tra le altre cose, la seguente disequazione: xa + xb + xc ↖45,
+che va in conﬂitto con l’ultima equazione. Dunque, non esiste alcuna soluzione.
+Se invece avessimo xa + xb + xc = 45 otterremmo una imputazione x = [5, 15, 25] che
+rende tutte contenti.
+8.1.3
+Core di un Gioco Coalizionale
+Dato un gioco G=(N,V) il core `e l’insieme di tutte le imputazioni x tali che:
+x ↔X(G) :
+↑S ∈N, si ha che v(S) ↓x(S)
+(8.7)
+Il core `e molto importante perch´e garantisce la stabilit`a delle coalizione. Se scelgo come
+soluzione uno qualunque di questi vettori nel core, sicuramente qualunque coalizione `e
+contenta, perch´e prende almeno quello che si aspetta. Chiaramente, il core pu`o essere
+vuoto e, se non fosse vuoto, potrebbe contenere molte possibili soluzioni.
+69
+TEORIA DEI GIOCHI
+Quali sono le altre propriet`a desiderabili per una distribuzione di valori (solution concept)?
+Simmetry Axiom: se dei giocatori sono interscambiabili allora dovrebbero avere
+la stessa worth. In altri termini:
+↑S che non contiene n´e i n´e j, allora v(S ⇓{i}) = v(S ⇓{j}).
+(8.8)
+Dummy Players: ad ogni giocatore, indipendentemente dalla coalizione in cui si
+trova, spetta la stessa ricchezza che otterrebbe giocando da solo. In altri termini:
+↑S tale per cui i /↔S,
+v(S ⇓{i}) →v(S) = v({i}).
+(8.9)
+Sostanzialmente, il contributo marginale del giocatore i per una coalizione S `e pari
+alla ricchezza che otterrebbe da solo.
+Additivity: deﬁnisco delle funzione di worth che si ottengono come somma delle
+funzioni di worth di partenza. Come se avessimo due giochi (con gli stessi giocatori
+ma con di!erenti worth function che sono additive tra di loro) che possono essere
+fusi tra di loro. In altri termini:
+%i(N, V1 + V2) = %i(N, V1) + %i(N, V2)
+dove:
+(V1 + V2)(S) = V1(S) + V2(S),
+↑S
+(8.10)
+8.1.4
+Shapley Value
+Si pu`o dimostrare che lo Shapley Value `e l’unica pre-imputazione (solution concept)
+che soddisfa le 3 propriet`a mostrare sopra. Con pre-imputation indichiamo che non ne-
+cessariamente bisogna soddisfare l’individual rationality (quindi potrebbe non essere una
+imputazione). Esso esiste sempre, dunque se i giochi ammettono soluzioni decenti, lui `e
+una soluzione decente. Se i giochi non ammettono imputazioni, siccome esso esiste sempre
+signiﬁca che deve violare qualcosa. Potremmo vederla come una soluzione meritocratica.
+E’ come se fosse la media pesata dei contributi marginali del giocatore i: per ogni coalizione
+S che non contiene i, vado a vedere il contributo marginale di i ovvero v(S ⇓{i}) →v(S)
+(il contributo che fornisco a ogni coalizione entrandoci). La media `e pesata rispetto alla
+cardinalit`a di S
+Formalmente, lo shapley value per il giocatore i `e pari a:
+↼i(N, v) =
+1
+|N|!
+#
+S↗N\i
+|S|! · (|N| →|S| →1)! · [v(S ⇓{i}) →v(S)]
+(8.11)
+In alternativa, possiamo vederlo facendo la media considerando tutti i possibili ordinamenti
+in cui si pu`o aggiungere il giocatore i.
+70
+TEORIA DEI GIOCHI
+8.1.5
+Insoddisfazione e Nucleolo
+Consideriamo un esempio: un parlamento `e fatto da 4 partiti politici {A, B, C, D} che
+hanno rispettivamente {45, 25, 15, 15} membri ciascuno. Devono decidere (votare) se il
+budget di un disegno legge pu`o essere di 100 milioni e devono anche decidere quanto di
+questa cifra deve essere controllata dai vari partiti. Vi `e un voto di maggioranza (51 voti)
+per far passare la proposta e, qualora non passasse, si perdono soldi e tutti hanno un
+guadagno nullo.
+Ad ogni coalizione vincente assegniamo 1 mentre a quelle perdenti assegniamo 0. Dunque,
+ogni gruppo che `e nella maggioranza prende 1.
+Il primo passo per risolvere consiste nel deﬁnire la worth, ricordando che per passare la
+legge (e ricevere la ricchezza) bisogna avere la maggioranza (51).
+Dunque, deﬁniamo:
+v({i}) = 0
+↑i = A, B, C, D;
+v({A, B}) = v({A, C}) = v({A, D}) = 100;
+v({B, C}) = v({B, D}) = v({C, D}) = 0;
+v({B, C, D}) = 100;
+v({A, B, C, D}) = 100.
+Possiamo notare che B,C,D si comportano in maniera uguale sebbene abbiano un di!e-
+rente numero di membri, quindi il loro contributo `e identico. In questo particolare gioco,
+c’`e un modo in cui riusciamo a soddisfare tutti (core non vuoto)?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+xa + xb + xc + xd = 100
+xb + xc + xd ↖100
+xa + xb ↖100
+xa + xc ↖100
+xa + xd ↖100
+xi ↖0
+(8.12)
+Esiste una soluzione a questo sistema? No, in questo gioco il core `e vuoto. Dunque, quello
+che possiamo fare `e provare ad usare lo shapley value. Facendo i calcoli otteniamo che:
+↼A = 50,
+↼B = ↼C = ↼D = 16.67
+(8.13)
+La soluzione proposta dallo shapley value `e x = [50,
+16.67,
+16.67,
+16.67]. Questa
+soluzione non `e nel core (siccome esso `e vuoto): infatti B,C,D potrebbero coalizzarsi e
+prendersi anche la quota di A.
+71
+TEORIA DEI GIOCHI
+Per valutare delle alternative, possiamo guardare all’insoddisfazione (excess) e cerca-
+re di minimizzarla.
+L’eccesso di una coalizione S con una imputazione x `e dato da
+e(x, S) = v(S) →x(S). Dunque, veriﬁchiamo l’eccesso delle varie coalizioni con il vet-
+tore xω (determinato dallo shapley value).
+e(xω, {A}) = 0 →50 = →50
+e(xω, {B}) = e(xω, {C}) = e(xω, {D}) = 0 →16.67 = →16.67
+e(xω, {A, B}) = e(xω, {A, C}) = e(xω, {A, D}) = 100 →(66.67) = 33.33
+e(xω, {B, C, D}) = 100 →50 = 50
+Possiamo notare come la coalizione pi`u insoddisfatta sia {B, C, D}, seguita dalle coppie
+che includono A. Potremmo pensare di ridurre questa diseguaglianza e, quindi, di mini-
+mizzare la massima insoddisfazione. In questo caso potremmo cercare una imputazione
+nella quale sia {B, C, D} sia le coppie che includono A abbiano la stessa insoddisfazione,
+che chiamiamo y. Ovviamente ci aspettiamo che 33.33 < y < 50 poich´e qualche risorsa
+sar`a ceduta da A. Otteniamo il seguente sistema:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+100 →xb →xc →xd = y
+100 →xa →xb = y
+100 →xa →xc = y
+100 →xa →xd = y
+.
+(8.14)
+Otteniamo che y = 200↔3xa
+2
+.
+Per l’e”ciency abbiamo che:
+xa + xb + xc + xd = 100
+(8.15)
+Possiamo sostituire xb + xc + xd utilizzando la prima equazione del sistema precedente,
+ottenendo:
+xa + 100 →y = 100
+(8.16)
+Da cui ricaviamo che xa = y.
+Ora, sostituiamo questa quantit`a nell’espressione di y che abbiamo ricavato dal sistema.
+y = 200 →3xa
+2
+y = 100 ↔3
+2y
+y = 100 · 2
+5 = 40
+(8.17)
+Dunque, per l’e”ciency si deve avere che xa = y = 40 e, di conseguenza:
+xb + xc + xd = 60
+(8.18)
+Per simmetria, otteniamo che:
+xa = 40,
+xb = 20,
+xc = 20,
+xd = 20
+(8.19)
+72
+TEORIA DEI GIOCHI
+Questo approccio di ridurre la massima insoddisfazione `e alla base del Nucleolo. Pi`u
+precisamente, col nucleolo cerchiamo una distribuzione che, a parit`a di so!erenza massima,
+riduce quella successiva e cos`ı via.
+Deﬁniamo il vettore delle soddisfazioni excess vector.
+Dato x ↔X(G) il vettore &(x) contiene i 2|N| valori di eccesso e(x, S),
+↑S ∈N
+ordinati in modo non crescente.
+Deﬁnizione: il Nucleolo `e l’insieme delle imputazioni che minimizzano lessicograﬁcamente
+il vettore degli eccessi &(x). In altri termini, il nucleolo N(G) di un gioco G `e l’insieme:
+N(G) = {x ↔X(G) :′ ⇔y subject to ς(y) ≃ς(x)}
+(8.20)
+E’ l’insieme delle imputazioni per cui non c’`e un altra imputazione che sia preferibile.
+Teorema: il Nucleolo `e costituito da un unico vettore x (qualora i valori non fossero
+interi).
+Vediamo altri concetti importanti e, soprattutto, come arriviamo alla deﬁnizione di nu-
+cleolo.
+Un ω-core `e un insieme di vettori di imputazione x tali per cui:
+↗S ↘N,
+#
+i↑S
+xi > v(S) ↔ω
+(8.21)
+Rappresenta un concetto di stabilit`a pi`u debole rispetto al core permettendo ai giocatori
+di deviare leggermente dalla soluzione. Sebbene ci sia la possibilit`a che per un determinato
+ω, l’ω-core potrebbe essere vuoto, chiaramente all’aumentare della sua grandezza aumenta
+la probabilit`a che l’ω-core non sia vuoto. Tale considerazioni ci porta direttamente alla
+prossima solution concept.
+Un least core `e un insieme di vettori di imputazione x tali per cui x `e la soluzione del
+seguente problema lineare:
+
+
+
+
+
+
+
+
+
+minimize ω
+subject to $
+i↓S xi ↖v(S) →ω,
+↑S ∈N
+x(N) = v(N)
+(8.22)
+Dunque, calcoliamo il valore ottimo che chiamiamo ω1. E’ possibile che vi siano delle
+coalizioni che soddisfano i vincoli per eguaglianza, le cosiddette coalizioni critiche Si,
+deﬁnite nel seguente modo:
+Si :
+x→(Si) = v(Si) →ω1
+(8.23)
+Dove x→(Si) `e la soluzione ottima per la coalizione i.
+73
+TEORIA DEI GIOCHI
+A questo punto, deﬁnendo con F1 l’insieme delle coalizione critiche al passo 1 (quello
+che abbiamo appena fatto), possiamo rendere ancora pi`u forte il least core, iterando il
+procedimento che abbiamo appena fatto, ovvero risolvendo il seguente problema lineare:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+minimize ω
+subject to $
+i↓S xi ↖v(S) →ω,
+↑S ↔2N →F1
+x(S) = v(S) →ω1↑S ↔F1
+x(N) = v(N)
+(8.24)
+Ora, se ripetiamo questo procedimento in maniera iterativa, convergiamo al nucleolo.
+8.1.6
+Un Problema dal Talmud e la Contested Garmant Rule
+Vi `e un uomo che muore lasciando:
+Una eredit`a di dimensione e;
+Debiti verso i creditori 1, ..., n di rispettivamente d1, ..., dn;
+Si ha che e < d1 + ... + dn
+Dunque, bisogna decidere come distribuire l’eredit`a tra i creditori, siccome essa non `e
+su”ciente a coprire tutti i crediti.
+Secondo un trattato nel Talmud si assume che vi sono 3 creditori che avanzano
+d1 = 100,
+d2 = 200,
+d3 = 300 e vi sono delle istruzioni:
+Se e = 100 ogni creditori riceve 33.33;
+Se e = 200 il creditore 1 riceve 50 mentre i creditori 2, 3 ricevono ciascuno 75;
+Se e = 300 il creditore 1 riceve 50, il creditore 2 riceve 100 mentre il creditore 3
+riceve 150.
+Quando le risorse sono su”ciente, la distribuzione `e mantiene le proporzioni dei crediti
+ma se le risorse non sono su”cienti si utilizzano delle strategie che non sono state ancora
+spiegate correttamente.
+Formalizziamo il problema: un problema della divisione di una eredit`a `e una coppia
+(e, (d1, ..., dn)) che la seguenti propriet`a:
+0 ↓d1 ↓d2 ↓... ↓dn
+Sia d = d1 + ... + dn... allora 0 ↓e ↓d
+Una divisione dell’eredit`a `e (x1, ..., xn) con 0 ↓xi↑i e x1 + ... + xn = e.
+Vi sono
+molti possibili approcci per e!ettuare la divisione: una divisione proporzionale, una equa
+divisione del bene (equal division of gains), equa divisione delle perdite (equal division of
+losses) etc.
+74
+TEORIA DEI GIOCHI
+Un criterio particolarmente interessante `e la Contested Garment Rule: supponiamo
+che vi siano due creditori che avanzano d1, d2 con d1 ↓d2. La somma totale che entrambi
+dovrebbero ricevere `e d = d1 + d2 mentre la somma totale da dividere `e e :
+0 ↓e ↓d.
+Il creditore 1 pu`o concedere il max(e →d1, 0) al creditore 2.
+Il creditore 2 pu`o concedere il max(e →d2, 0) al creditore 1.
+Quello che rimane dell’eredit`a, ovvero e →max(e →d1, 0) →max(e →d2, 0) lo
+divido in maniera eguale.
+Tale regola interpola linearmente la equal division of gains ed equal division of losses.
+E’ stato dimostrato che in qualunque problema di divisione dell’eredit`a esiste esattamente
+una divisione possibile dell’eredit`a che `e consistente con questa regola. Inoltre, hanno
+dimostrato che questa soluzione `e esattamente il nucleolo del gioco dove ogni coalizione
+pretende il massimo tra 0 e quello che gli concedono quelli che non appartengono alla
+coalizione.
+Dunque, abbiamo deﬁnito la funzione di worth e se utilizziamo il nucleolo
+otteniamo quella esatta soluzione.
+75
+TEORIA DEI GIOCHI
+8.2
+Aste e Mechanism Design
+Esistono due principali categorie di aste:
+Single good: si fanno o!erte relative ad un unico oggetto;
+Multiple goods: si fanno o!erte relative ad insiemi di oggetti, il suo campo di
+ricerca riguarda le combinatorial auctions.
+Noi ci concentreremo sulle aste single-good.
+La pi`u famosa tipologia di aste single good `e la English auction: le o!erte dei partecipanti
+vanno ad incrementare e il bene viene assegnato al maggiore o!erente. L’utilit`a, per chi
+gestisce il meccanismo, `e di vendere al pi`u alto prezzo possibile, che deve essere maggiore
+del suo valore. Ogni partecipante, ovvero l’agente i, attribuisce all’oggetto un valore v(i)
+(segreto) e fa un o!erta S(i). Dunque, egli possiede una utilit`a pari a:
+ui =
+
+
+
+vi →Si
+se i vince l’asta
+0
+altrimenti
+(8.25)
+Una alternativa all’asta inglese `e la Japanese auction: `e piuttosto simile a quella inglese
+con la di!erenza che chi gestisce l’asta ﬁssa le o!erte progressivamente, mentre i giocatori
+o escono (senza poter pi`u giocare) o continuano a giocare. Vince il bene l’ultima giocatore
+che resta. Un’altra alternativa `e la Dutch auction che `e un’asta al ribasso: si parte da
+un prezzo alto e man mano si scende. Vince il primo giocatore che punta.
+Come si progettano i meccanismi delle aste (Mechanism Design)?
+Il Mechanism Design consiste nello stabilire delle regole dei giochi tali per cui gli agenti
+razionali, in modo da massimizzare i loro proﬁtti, devono attuare strategie che il gestore
+ha pensato. Si vuole avere un mechanism design truthful: deve essere conveniente per gli
+agenti rilevare le loro intenzioni (ad esempio i valori veri - segreti - che essi attribuiscono
+agli oggetti).
+8.2.1
+Sealed-Bid Auctions
+In questa tipologia di aste le o!erte sono segrete. Vince l’agente che ha o!erto la cifra pi`u
+elevata.
+Se l’asta `e a busta chiusa, su cosa mi posso regolare per fare o!erte? Mi posso basare sul
+valore che attribuisco al bene, sul numero di partecipanti e sui loro proﬁli (ad es. il loro
+budget, la loro tendenza a fare o!erte alte etc). Formalmente, potremmo avere informa-
+zioni sulle distribuzioni di probabilit`a di assegnamenti di valori da parte dei competitor.
+76
+TEORIA DEI GIOCHI
+Nei meccanismi pi`u semplici, si parla di Distribuzioni IPV (Independent Private Va-
+lues), dove esiste una distribuzione nota di probabilit`a dove i valori di ogni giocatore sono
+indipendenti.
+8.2.2
+Second-Price Auctions
+Presenta uno dei meccanismi di aste pi`u semplice. Ogni agente partecipa all’asta, fa la
+sua o!erta e vince se ha fatto l’o!erta pi`u alta ma il prezzo che paga non `e il suo ma,
+bens`ı, `e la seconda o!erta pi`u alta (la pi`u alta o!erta perdente). Tale mechanism design `e
+truthful indipendentemente dalla distribuzione di probabilit`a dei vari agenti. Difatti, mi
+conviene sempre o!rire il valore attributo al bene o, in altre parole, giocare vi = Si
+↑i
+`e la miglior scelta.
+CASO 1:
+Siano sj i bid degli altri agenti e assumiamo che siano minori rispetto al mio valore vi.
+Se gioco si < vi potrei perdere guadagnando ui = 0.
+Se gioco si = vi vincerei guadagnando ui = vi →smax.
+Se gioco si > vi vincerei guadagnando ui = vi →smax.
+Dunque, appare chiaro che indipendentemente da quanto gioco, guadagno sempre
+ui = vi →smax, dove smax = max
+j↘=i sj, quindi mi conviene giocare in modo truthful.
+CASO 2:
+Si ha che ⇔qualche j con sj > vi, quindi smax > vi.
+Se gioco si < vi perdo sicuramente guadagnando ui = 0.
+Se gioco si = vi perdo sicuramente guadagnando ui = 0.
+Se gioco si > vi potrei perdere oppure potrei vincere con ii = vi →smax < 0
+In tutte queste circostanze non ho alcuna situazione vantaggiosa, siccome anche quando
+vinco ho una utilit`a negativa (per come `e deﬁnito smax). Siccome non so come giocano
+gli altri giocatori (quindi non so se si veriﬁca il caso 2) mi conviene comunque giocare
+si = vi. Il meccanismo dell’asta giapponese si comporta in modo simile ed anch’esso `e
+truthful.
+77
+TEORIA DEI GIOCHI
+8.2.3
+First-Price Auctions
+Anche in questo caso vi sono o!erte a buste chiusa. Tuttavia, non vi `e l’assunzione che le
+puntate siano indipendenti dagli altri. Dobbiamo ragionare su quello che fanno gli altri.
+Supponiamo di avere due giocatori e che s2 = 1
+2v2, ovvero che egli o!ra la met`a del valore
+che attribuisce al bene. Supponiamo che questi valori siano tratti da una distribuzione in
+[0, 1]. Quale `e la migliore strategia per il giocatore 1? Facciamo una stima del suo valore
+atteso.
+E[u1] =
+) 2s1
+0
+ui dv2 + 0
+) 1
+2s1
+u1 dv2
+(8.26)
+Si noti che il secondo integrale `e moltiplicato per 0 poich´e se il giocatore 2 ha un valore
+maggiore di 2s1, la sua o!erta (pari alla met`a del valore) sar`a maggiore della mia, quindi
+ottengo una utilit`a nulla. Il valore preciso `e pari a:
+E[u1] =
+) 2s1
+0
+ui dv2 = (v1 ↔s1) · v2|2s1
+0
+= 2v1s1 →2s2
+1
+(8.27)
+Dunque, questo `e il valore dell’utilit`a attesa di u1 in funzione del bid s1.
+Per calcolare l’s1 che massimizza l’utilit`a possiamo calcolare la derivata della quantit`a di
+cui sopra e imporre le condizioni del primo ordine.
+d
+d s1
+E[u1] = 2v1 →4s1
+(8.28)
+Se imponiamo = 0 otteniamo che la miglior risposta `e s1 = 1
+2v1.
+Se l’avversario gioca la met`a del suo valore, allora la mia miglior risposta `e giocare la met`a
+del mio valore. Inoltre, in questa condizione, all’avversario non conviene cambiare poich´e
+per lui valgono le stesse considerazioni. E’ una condizione di equilibrio. Si noti che la
+distribuzione deve essere uniforme.
+Quello che abbiamo visto `e un caso speciﬁco.
+Esiste un teorema generale che dimostra in un ﬁrst-price auction in cui vi sono n agenti
+risk-neutral (agente senza propensione al rischio, l’utilit`a `e come quella di prima, dove
+si vuole guadagnare... gli agenti propensi al rischio sono propensi ad avere una utilit`a
+leggermente negativa) e se la distribuzione `e uniforme, allora l’unico equilibrio simmetrico
+che si ha, ha la forma:
+*n →1
+n
+v1, ..., n →1
+n
+vn
++
+(8.29)
+Essa `e l’utilit`a degli n giocatori.
+78
+TEORIA DEI GIOCHI
+8.3
+Giochi Strategici
+Nei giochi strategici non si ragiona in termini di coalizioni: ogni giocatore gioca per se
+stesso, cercando di ottenere il massimo proﬁtto possibile. Tipicamente, i vari agenti hanno
+obiettivi che sono in contrasto tra di loro.
+Dilemma del Prigioniero:
+E’ un classico esempio dove vi sono due giocatori che, come azioni, possono confessare
+oppure non confessare (eventualmente accusando l’altro prigioniero).
+Consideriamo la
+seguente tabella, dove la righe sono associate al primo prigioniero e le colonne al secondo
+prigioniero. Ogni coppia rappresenta rispettivamente il valore atteso del giocatore uno
+e due nelle relative circostanze. Ciascun giocatore non sa quello che sta facendo l’altro.
+Sostanzialmente, conoscono la seguente tabella ma non conoscono la scelta. Difatti, tali
+giochi sono istantanei.v Come detto in precedenza, lo scopo di ciascun giocatore `e quello
+di massimizzare la sua utilit`a.
+Ad esempio:
+v1({A1 = confess, A2 = don’t confess}) = 0
+v2({A1 = confess, A2 = don’t confess}) = →4
+(8.30)
+Possiamo notare che la scelta migliore che possano e!ettuare i prigionieri `e confessare
+entrambi. Infatti, se entrambi non confessassero otterrebbero la migliore utilit`a possibile
+tuttavia se uno di loro pensasse che l’altro non confessi, allora gli converrebbe confessare
+poich´e non ﬁnirebbe in prigione oppure si farebbe un unico anno di galera. Chiaramente
+questo equilibrio non `e stabile, poich´e i prigionieri potrebbero cambiare idea da un mo-
+mento all’altro (magari in seguito all’inﬂuenza degli accusatori), cambiando convenienza
+di azione.
+Tale equilibrio prende il nome di Equilibrio di Nash
+79
+TEORIA DEI GIOCHI
+8.3.1
+Equilibrio di Nash
+Anzitutto, deﬁniamo formalmente un gioco strategico.
+Abbiamo un insieme di N giocatori.
+Per ogni giocatore i ↔N abbiamo l’insieme Si delle azioni/strategie ammissibili,
+dove gli elementi di Si (ovvero le singole azioni ammissibili) sono indicati con la
+lettera minuscola, ovvero si.
+Vi `e l’insieme dei proﬁli di azione, ovvero S = ▽
+j↓N
+Sj = S1 ▽... ▽SN, che `e
+il prodotto cartesiano tra tutte le possibili Sj.
+Per ogni giocatore i ↔N vi `e la sua relazione di preferenza sull’insieme dei proﬁli
+di azione S oppure vi `e, sempre per ogni giocatore i ↔N, la sua funzione di utilit`a
+ui : S ↘R che assegna un valore reale ad ogni proﬁlo di azione.
+Un proﬁlo di azione `e una N-upla di azioni ammissibili, una per ciascun giocatore,
+ovvero (s1, ..., sN).
+Dato un proﬁlo di azioni/strategie S→↔S e un giocatore i ↔N, deﬁniamo
+S→
+↔i = (s1, ..., si↔1, si+1, ..., sN) l’insieme delle strategie/azioni dei restanti giocatori.
+Deﬁnizione:
+S→`e un equilibrio di nash se ↑i ↔N, si ha che ui(S→) ↖ui(si, S→
+↔i) ↑si ↔Si
+Sostanzialmente, per avere un equilibrio di nash per un certo proﬁlo di azione, nessun
+giocatore pu`o migliorare date le scelte degli altri. In altri termini, ﬁssate le scelte degli
+altri giocatori, l’iesimo giocatore non pu`o migliorare la sua utilit`a facendo una scelta
+diversa.
+Consideriamo un esempio, ovvero il gioco dei Bach e Stravinsky (detto anche gioco dei
+sessi):
+Due persone vogliono uscire insieme per andare a sentire un concerto o di Bach o di Stra-
+vinsky. Ognuno preferirebbe ascoltare un particolare concerto ma entrambi preferiscono
+uscire insieme piuttosto che andare da soli al concerto da loro preferito. Questo gioco
+presenta due equilibri di Nash in particolare (Bach,Bach) e (Stravinsky,Stravinsky). Se ne
+esitono due, quale azione deve scegliere un determinato giocatore?
+In generale possiamo interpretare queste situazioni nel seguente modo: in delle popolazioni
+su”cientemente grandi si vanno ad osservare entrambi i comportamenti. In ogni caso,
+vediamo se riusciamo a deﬁnire l’equilibrio di nash in maniera alternativa.
+80
+TEORIA DEI GIOCHI
+Per ogni giocatore i ↔N, possiamo deﬁnire la funzione di best response Bi(s↔i) che,
+ﬁssate le scelte degli altri, restituisce l’insieme delle scelte che fornisce la migliore utilit`a.
+In altri termini, dato un proﬁlo di azioni attuato dagli avversari del giocatore i, ovvero
+s↔i, deﬁniamo:
+Bi(s↔i) = {si ↔Si :
+ui(si, s↔i) ↖ui(s↑
+i, s↔i),
+↑s↑
+i ↔Si}
+(8.31)
+Utilizzando questo concetto possiamo deﬁnire in maniera di!erente l’equilibrio di nash.
+Deﬁnizione:
+Dato un proﬁlo di azioni s→↔S, esso `e un equilibrio di Nash se s→
+i ↔Bi(s→
+↔i)
+↑i ↔N.
+Si noti che le strategie viste ﬁnora sono dette strategie pure, che non garantiscono
+l’esistenza di un equilibrio.
+8.3.2
+Strategie Miste
+Le strategie miste garantiscono l’esistenza di un equilibrio di nash. Le strategie miste
+↽i deﬁniscono una distribuzione di probabilit`a sulle scelte del giocatore i. Sostanzialmen-
+te, ogni giocatore sceglie una determinata azione con una determinata probabilit`a.
+Si
+introduce il non determinismo.
+Quando si e!ettua una azione, essa porta delle conseguenze. Razionalmente, si preferisce
+l’azione che porta alle conseguenze che preferisce tuttavia non sempre la relazione tra
+azioni e conseguenze `e deterministica. Nei contesti stocastici la scelta di una azione pu`o
+essere vista come la scelta di un biglietto della lotteria, dove i premi sono le conseguenze.
+Naturalmente, esistono varie lotterie, dove una lotterie `e una distribuzione di probabilit`a
+sull’insieme dei premi. Per poter e!ettuare delle scelte `e necessario deﬁnire una relazione
+di preferenza sull’insieme di tutte le possibili lotterie. Una tipica relazione di preferenza
+`e l’Utilit`a Attesa U(·) dove un numero v(Z), viene associato ad ogni premio (valore
+di una conseguenza, dove Z `e l’insieme dei premi, e una lotteria viene valutata in base al
+suo valore atteso.
+Formalmente, data una lotteria p, deﬁniamo:
+U(p) =
+#
+z↓Z
+p(z)v(z)
+(8.32)
+Si noti che `e importante notare la distinzione tra U(p) (che `e l’utilit`a della lotteria) da
+v(z) (che rappresenta le preferenze sull’insieme Z dei premi). Difatti, si dice che v(·) `e
+una funzione di utilit`a di Von Neumann/Morgenstern che, siccome l’utilit`a della lotteria
+soddisfa gli assiomi di indipendenza e continuit`a, ha dei valori unici che v(z) che sono
+unici e che quindi permettono di rappresentare mediante U(·) le relazioni di preferenza
+tra le lotterie.
+81
+TEORIA DEI GIOCHI
+Tornando al contesto dei giochi strategici, deﬁniamo utilit`a attesa di una strategia ↽
+(combinata ↑↽i) come:
+Ui(↽) =
+#
+si↓Si
+↽i(si) · Ui(e(si), ↽↔i)
+(8.33)
+Dove e(si) `e la strategia degenere pura, dove il giocatore i gioca con probabilit`a 1 si
+mentre gli altri giocano quello che avevano scelto di giocare. Dunque, l’utilit`a attesa del
+giocatore i che utilizza una strategia mista ↽`e data dalla sommatoria per ogni singola
+sua azione ammissibile tra la probabilit`a di giocarla e il valore che si otterrebbe giocando
+quella azione qualora le scelte degli altri fossero ﬁssate). Quanto detto si pu`o deﬁnire in
+maniera analoga con le best response.
+Deﬁnizione:
+Abbiamo un equilibrio di Nash se per ogni giocatore i ↔N si ha che
+Ui(↽→) ↖Ui(↽↑
+i, ↽→
+i )
+↑↽↑
+i alternativo.
+TEOREMA DI NASH:
+Esiste sempre un equilibrio (misto) di Nash.
+Deﬁniamo il supporto di una strategia ↽i come:
+supp(↽i) = {si ↔Si : ↽i(si) > 0}
+(8.34)
+Sostanzialmente, sono le azioni che posso giocare con probabilit`a non nulla.
+TEOREMA:
+Possiamo dire che ↽→= (↽→
+i )i↓N `e un equilibrio misto di Nash ↙⇑per ogni i ↔N,
+tutte le strategie pure nel supporto ↽→
+i sono best response a ↽→
+↔i (le migliori scelte che
+giocano gli altri).
+Si noti che se nella strategia mista per il giocatore i rispetto alle scelte randomizzate degli
+altri vi sono due azioni A,B ottimali, la strategia mista del giocatore i non pu`o degenerare
+in una strategia pura A oppure B. Infatti, se vi fosse questa degenerazione potrebbero
+cambiare le scelte degli altri (cambiando randomizzazione o giocando in maniera pura),
+rompendo l’equilibrio misto di Nash. Difatti, questa situazione sarebbe possibile qualora
+le strategie degli avversari fossero ﬁssate, tuttavia non lo sono.
+Dimostrazione ↘
+Se ↽→`e un equilibrio di nash, allora tutte le azioni in supp(↽→) sono best response.
+Supponiamo per assurdo che non sia cos`ı. Dunque, esiste almeno un giocatore per il quale
+almeno una delle sue azioni non `e una best response rispetto alle strategie degli avversari.
+In altri termini, esiste un giocatore i e una azione si : si ′↔B(↽→
+↔i). Di conseguenza,
+esiste un’altra azione sj ↔B(↽→
+↔i) che garantisce una migliore utilit`a.
+82
+TEORIA DEI GIOCHI
+Quindi, se sj era nel supporto, possiamo aumentare la sua probabilit`a (e diminuire quella
+di si) in modo da migliorare l’utilit`a. Vale questa stessa considerazione qualora sj non
+fosse stata nel supporto.
+Dunque, otteniamo che:
+Ui(↽↑
+i, ↽→
+↔i) > Ui(↽→, ↽→
+↔i)
+(8.35)
+Dove ↽↑
+i contiene la nuova probabilit`a per sj. Dunque, viene contraddetta l’ipotesi che
+↽→fosse un equilibrio di Nash.
+Dimostrazione △
+Supponiamo che ↽→non sia un equilibrio misto di Nash e che per il giocatore i esista una
+strategia ↽↑
+i tale che:
+Ui(↽↑
+i, ↽→
+↔i) > Ui(↽→)
+(8.36)
+Questo signiﬁca che esiste una azione nel supporto di ↽↑
+i che restituisce una utilit`a pi`u alta
+di una qualche azione nel supporto di ↽→
+i in risposta al proﬁlo di strategie ↽→
+↔i. Pertanto,
+signiﬁca che non tutte le azioni nel supporto di ↽→
+i sono best response a ↽→
+↔i, che `e una
+contraddizione.
+Corollario 1:
+Come conseguenza del precedente teorema, otteniamo che:
+↑i ↔N,
+↑s↑
+i, s↑↑
+i ↔supp(↽→
+i )
+allora
+Ui(s↑
+i, ↽→
+↔i) = Ui(s↑↑
+i , ↽→
+↔i)
+(8.37)
+Corollario 2:
+Tutte le azioni del supporto sono best response. In altri termini:
+supp(↽→
+i ) ∈Bi(↽→
+↔i)
+(8.38)
+83
+TEORIA DEI GIOCHI
+8.3.3
+Esempio di Equilibrio di Nash Misto
+Consideriamo il precedente esempio di Bach e Stravinsky.
+Assumiamo che il giocatore 2 decida di giocare Bach con una probabilit`a ↽2(B) e Stra-
+vinsky con probabilit`a (1 →↽2(B)). Cosa possiamo dire per il giocatore 1? Calcoliamo
+le sue utilit`a.
+U1(B, ↽2) =
+U1(B, B) · ↽2(B) + U1(B, S) · (1 →↽2(B)) =
+2↽2(B)
+U1(S, ↽2) =
+U1(S, B) · ↽2(B) + U1(S, S) · (1 →↽2(B)) =
+1 →↽2(B)
+(8.39)
+Si noti che i risultati sono stati ottenuti sostituendo con le utilit`a presenti in ﬁgura.
+A questo punto, possiamo dire che il giocatore 1 preferir`a giocare Bach quando
+U1(b, ↽2) > U1(S, ↽2) (vale anche il viceversa). Dunque, questo accade quando:
+2↽2(B) > 1 →↽2(B)
+(8.40)
+In altri termini, se:
+↽2(B) > 1
+3
+(8.41)
+Dunque, possiamo estrarre la distribuzione ↽1(B):
+↽1(B) =
+
+
+
+
+
+
+
+1
+se
+↽2(B) > 1
+3
+0
+se
+↽2(B) < 1
+3
+[0, 1]
+se
+↽2(B) = 1
+3
+(8.42)
+Se facciamo lo stesso ragionamento per il giocatore 2 otteniamo che:
+↽2(B) =
+
+
+
+
+
+
+
+1
+se
+↽1(B) > 2
+3
+0
+se
+↽1(B) < 2
+3
+[0, 1]
+se
+↽1(B) = 2
+3
+(8.43)
+Gli unici casi che non portano a strategie pure si veriﬁca quando:
+↽1(B) = 2
+3,
+↽1(S) = 1
+3,
+↽2(B) = 1
+3,
+↽2(S) = 2
+3
+(8.44)
+Dunque, otteniamo il seguente equilibrio di Nash misto:
+,*2
+3,
+1
+3
++
+,
+*1
+3,
+2
+3
++-
+(8.45)
+84
+TEORIA DEI GIOCHI
+8.4
+Giochi in Forma Estesa
+Nei giochi strategici si gioca in maniera istantanea, non sappiamo cosa sceglier`a l’avversario
+ed egli non sa cosa sceglieremo noi. Se il gioco `e a informazione completa per`o conosciamo
+le sue preferenze e le sue utilit`a. Questi giochi esistono anche in forma ripetuta: il gioco
+dura in maniera estensiva e si tiene conto di quello che `e successo in passato. Essi possono
+essere a informazione perfetta, se conosco tutto (dove mi trovo, cosa `e successo etc),
+informazione imperfetta, memoria perfetta (se ricordo tutto quello che `e successo nel
+passato) o memoria imperfetta.
+Consideriamo dei giochi a informazione e memoria perfetta. Essi possono essere rappre-
+sentati mediante dei game tree dove vi `e un nodo di origine, dei nodi di decisione e dei
+nodi terminali.
+I nodi di decisione sono partizionati in base ai giocatori (in ﬁgura vi sono due giocatori) e vi
+sono una serie di azioni che si possono compiere (archi). Nei nodi terminali sono mostrate
+le utilit`a dei giocatori. Una strategia `e una funzione che, a seconda del nodo in cui ci si
+trova, restituisce l’azione da compiere. Anche in questo caso le strategie potrebbero essere
+randomizzate. Anche su questi giochi potremmo deﬁnire un equilibrio di Nash.
+Consideriamo dei giochi ad informazione imperfetta. Il giocatore si trova in una sorta di
+nuvola: ad esempio il giocatore 2 potrebbe non essere in grado di sapere se si trova nel
+ﬁglio destro o sinistro della radice. Tale insieme di nodi (delimitati dal rosso in ﬁgura)
+prende il nome di information set.
+85
+TEORIA DEI GIOCHI
+Un information set (nei giochi con informazione incompleta) `e un insieme di nodi di deci-
+sione che per il giocatore (in base alle informazioni che ha) sono indistinguibili. Il giocatore
+deve ideare una strategia che dipenda dall’information set piuttosto che dal singolo nodo
+di decisione. Si noti che i nodi di decisione all’interno di uno stesso information set devono
+avere le stesse azioni ammissibili.
+Consideriamo il seguente esempio (ad informazione completa).
+Possiamo notare che se il giocatore 1 scegliesse A e il giocatore 2 scegliesse R, ad entrambi
+non converrebbe cambiare mossa. Se il giocatore 1 giocasse B non gli converrebbe cambiare
+in A perch´e altrimenti il giocatore 2 potrebbe giocare L. Dunque, esistono due equilibri di
+Nash, ovvero (A, R)
+(B, ̸) con le seguenti utilit`a: (2, 1)
+(1, 2). Si noti che, tuttavia,
+il giocatore 1 non sceglierebbe mai B perch´e A (sapendo che il giocatore 2 giocherebbe
+R a meno che non peggiori la sua utilit`a) gli garantirebbe una utilit`a maggiore. Tale
+ragionamento porta alla seguente deﬁnizione.
+In un gioco estensivo si ha un Subgame Perfect Equilibrium (SPE) se la restrizione
+della strategia (equilibrio di nash per il gioco completo) in qualunque sottogioco `e ancora
+un equilibrio di nash per il sottogioco.
+Teorema:
+Ogni gioco estensivo ad informazione perfetta ammette un Subgame Perfect Equilibrium di
+strategie pure. Si noti che la dimostrazione di questo teorema `e sostanzialmente l’algoritmo
+MiniMax.
+86
+Capitolo 9
+Answer Set Programming
+Nella logica classica (monotona) ogni nuova informazione/concetto aumenta la conoscen-
+za. La logica umana non `e monotona: le nuove informazioni potrebbero rappresentare
+un eccezione di quelle che gi`a conosciamo o viceversa. La default logic, la circumscrip-
+tion, l’epistemic reasoning sono delle teorie che si rifanno al commonsense programming
+(un’idea secondo la quale per sviluppare un artefatto intelligente `e necessario formalizzare
+il ragionamento di senso comune/umano che, come detto, `e non monotono). Si tende a
+credere vere le cose che si possono dimostrare essere vere e a credere false tutto il resto,
+minimizzando le conoscenze sul mondo.
+Una tipica assunzione in questo contesto `e la Closed World Assumption (CWA):
+assunzione di mondo chiuso... dato un certo contesto che si vuole studiare, si assume che
+tutto quello che non appare non esiste e, dunque, un oggetto diventa rilevante solamente
+se appare.
+Dal punto di vista logico, i concetti che vedremo si basano sulla logica del primo ordi-
+ne. L’obiettivo `e di speciﬁcare in maniera dichiarativa un problema utilizzando la logica.
+Il potere espressivo di questi linguaggi `e #p
+2: sono problemi risolvibili da macchine de-
+terministiche che usano come oracoli un’altra macchina deterministica.
+Si noti che il
+potere espressivo `e di!erente dalla complessit`a: la potenza espressiva indica ”la classe” di
+problemi che si pu`o rappresentare.
+Dato un linguaggio, che `e un problema, una istanza `e una stringa che appartiene al lin-
+guaggio.
+Se abbiamo un linguaggio L ↔#p
+2 allora esiste un programma logico (PL) Datalog Di-
+sgiuntivo p che risolve quel problema. In altri termini:
+L ↔↽p
+2 ↘
+⇔p :
+w ↔L ↙⇑p ⇓w `e una istanza yes del problema di PL
+(9.1)
+Dove w `e una istanza. Un problema si mappa in un programma (ﬁssato) e si hanno le
+istanze che saranno gli input di quel programma. La complessit`a `e anche #p
+2.
+87
+ANSWER SET PROGRAMMING
+9.1
+Datalog
+Introduciamo qualche concetto:
+I termini sono delle costanti oppure delle variabili.
+Le costanti sono gli oggetti che esistono nel mondo e, tipicamente, iniziano con la
+lettera minuscola o tra virgolette. I numeri sono anche delle costanti che pongono
+ulteriori problemi: sono inﬁniti quindi vanno gestiti in congiunzione all’ipotesi di
+mondo chiuso. Noi ignoreremo i numeri.
+Le variabili iniziano con la lettera maiuscola.
+I predicati pred(t1, ..., tn) hanno un nome di predicato, delle parentesi tonde e,
+al loro interno, hanno un certo numero di termini. L’arit`a di un predicato `e pari al
+numero dei suoi argomenti.
+Un atomo `e una istanza di predicato.
+Esiste anche la parola chiave not che, appunto, nega quello che lo segue.
+Un letterale `e un atomo o un suo negato.
+Un programma di Datalog `e un insieme di regole.
+Una regola a : →b1, ..., bk, not bk+1, ..., not bm ha una testa a e un corpo, separati
+da : →. Indica che `e vero la testa se il corpo `e vero. Si noti che a, bi sono degli atomi.
+Deﬁniamo:
+H(r) la testa della regola;
+B(r) l’insieme di tutti i letterali;
+B+(r) l’insieme di tutti i letterali positivi;
+B↔(r) l’insieme di tutti i letterali negati.
+Nella versione classica di Datalog si pu`o avere un solo atomo nella testa. Nella versio-
+ne pi`u potente, ovvero quella disgiuntiva, si pu`o avere una disgiunzione di atomi
+a1 ⇓... ⇓an.
+Il datalog classico `e detto positivo e, oltre a contenere un unico atomo nella testa, presenti
+tutti gli atomi positivi. Sebbene sia e”ciente non permette di gestire logica non monotona
+(che nasce con la presenza della negazione).
+Si noti che un atomo pu`o apparire sia nella testa che nel corpo: difatti in Datalog esiste
+la ricorsione che pu`o essere diretta (nella stessa regola) oppure indiretta (mediante altre
+regole che richiamano altre regole etc). La ricorsione `e molto importante in Datalog poich´e
+garantisce espressivit`a.
+Consideriamo un esempio:
+Introducendo questa regola riesco a derivare nuova conoscenza (deﬁnisco cosa `e un prodotto
+british).
+88
+ANSWER SET PROGRAMMING
+Per derivare nuova conoscenza `e necessario partire da alcuni assiomi, che sono veri per
+ipotesi. Tali assiomi prendono il nome di fatti. Sono rappresentati mediante delle regole
+con un corpo vuoto.
+Ad esempio:
+Nel mondo di Datalog si distinguono due insiemi di predicati:
+EDB: rappresentati esplicitamente... compaiono solo nei corpi delle regole o nei
+fatti. Possiamo interpretarli come l’input.
+IDB: deﬁniti intenzionalmente...
+costituiscono la conoscenza prodotta.
+Possono
+essere interpretati come l’output (in realt`a un sovrainsieme dell’output).
+La programmazione logica `e uno strumento pi`u forte di sql per fare query.
+Consideriamo un esempio: supponiamo di voler scrivere un programma SQL che restituisce
+tutte le citt`a raggiungibili dall’aeroporto di lamezia mediante voli diretti e indiretti. In
+SQL non `e facile ma nel mondo della logica `e banale: supponiamo che vi siano un insieme
+di fatti connected( , ).
+In Datalog, a di!erenza di Prolog, l’ordine non `e importante... esso `e puramente basato
+sulla logica.
+9.2
+Semantica
+I seguenti concetti non valgono solo per Datalog ma per qualsiasi linguaggio di logic
+programming.
+Premettendo che con atomi ground si intendono degli atomi che non possiedono variabili,
+possiamo dire che una Interpretazione I per un programma `e un insieme di atomi
+ground.
+89
+ANSWER SET PROGRAMMING
+Una interpretazione assegna un signiﬁcato ad ogni atomo: tutti gli atomi nella interpre-
+tazione I sono veri mentre gli altri sono falsi. Dunque, posso dire che un atomo a `e vero
+per una interpretazione I se a ↔I, altrimenti `e falso. Un letterale negativo not(a) `e vero
+rispetto ad I se a ′↔I.
+Il nostro obiettivo `e deﬁnire i modelli: la conoscenza, tutto ci`o che si ritiene sia vero.
+Una interpretazione I `e un modello per un programma se per ogni regola nel programma,
+la testa `e vera rispetto ad I allorch´e il corpo `e vero rispetto ad I.
+Ad esempio, dato il programma:
+Possiamo dire che, data l’interpretazione I = {c, d}, gli atomi c,d sono veri rispetto ad
+I mentre gli altri non lo sono. Date le interpretazioni I1 = {b, c, d}, I2 = {a, b, c, d}
+e I3 = {c, d} possiamo dire che I2, I3 sono dei modelli mentre I1 non lo `e, siccome il
+corpo della prima regola `e vero rispetto ad I1 mentre la testa non lo `e. Si noti che qualora
+il corpo di una regola non fosse vero, la testa potrebbe comunque essere vera.
+Consideriamo un altro esempio:
+a : →b
+b : →not(c)
+(9.2)
+Possiamo dire che I1 = {a} non `e un modello poich´e b deve essere vero. Invece I2 = {c}
+e I3 = {a, b} sono dei modelli che sono entrambi minimali poich´e non esiste un loro
+sottoinsieme che sia un modello.
+9.3
+Answer Set
+Nella logica classica (monotona), la regola b : →not(c) `e equivalente a scrivere
+b ⇓c : →true cos`ı come c : →not(b). Nella logica monotona, invece, `e di!erente poich´e il
+not ha un signiﬁcato diverso: assumiamo che b sia vero quando non `e possibile dimostrare
+c... difatti tale relazione prende il nome di default negation.
+Si noti l’importante di!erenza tra la logica monotona e quella non monotona: il modello I3
+di cui sopra (che considera c falso) nella logica classica, qualora venisse introdotta nuova
+conoscenza secondo la quale c potrebbe essere falso, rimarrebbe un modello valido. Nella
+logica non monotona, invece, il modello non sarebbe pi`u adeguato poich´e la conoscenza
+cambia in maniera non monotona.
+90
+ANSWER SET PROGRAMMING
+Consideriamo un altro esempio:
+a : →b
+a ⇓b : →
+: →not(a)
+(9.3)
+Una regola con la testa vuota `e detta vincolo: il corpo non pu`o mai veriﬁcarsi poich´e
+implica la testa vuota (che rappresenta una cosa impossibile). Si noti che la seconda regola
+`e un fatto. In questo caso l’interpretazione I1 = {a} `e un modello minimale, I2 = {a, b}
+`e anche un modello ma non minimale. Si noti che, siccome a deve essere necessariamente
+vero all’interno di un qualsiasi modello (minimale) allora la seconda regola `e ridondante: `e
+sempre soddisfatta indipendentemente da b dunque, non essendo necessario che b sia vero,
+la consideriamo falsa. Infatti, siamo interessati a ricercare i modelli minimali, i cosiddetti
+Answer Set.
+Consideriamo un altro esempio:
+p(x) : →q(x),
+not(r(x))
+q(a.)
+q(b).
+r(a).
+(9.4)
+Un programma ground `e costituito da tutti i fatti e tutte le possibili istanziazioni delle
+regole. Dunque, otteniamo il seguente programma ground:
+p(a) : →q(a),
+not(r(a))
+p(b) : →q(b),
+not(r(b))
+q(a.)
+q(b).
+r(a).
+(9.5)
+L’unico Answer Set di questo programma `e I = {p(b), q(a), q(b), r(a)}. Chiara-
+mente esistono altri modelli, come {r(a), r(b), q(a), q(b)} che, per`o, non `e Answer
+Set poich´e non c’`e modo di veriﬁcare r(B) e, dunque, non `e minimale.
+Un concetto molto importante `e la safety.
+Una regola `e safe se:
+Ogni variabile nella testa;
+Ogni variabile in un letterale negato;
+Ogni variabile in ogni operatore di confronto;
+Appare anche in un letterale positivo del corpo. In sintesi, tutte le variabili devono apparire
+almeno una volta nella parte positiva del corpo.
+91
+ANSWER SET PROGRAMMING
+Ad esempio, le seguenti regole non sono safe:
+Tale concetto `e un vincolo sintattico: nei vari interpreti/etc vengono segnalate queste
+regole.
+La negazione di un letterale all’interno di una ricorsione pu`o creare problemi ma si pu`o
+risolvere con la negazione stratiﬁcata. Posso deﬁnire un grafo delle dipendenze dove in-
+serisco un arco tra due predicati se uno `e derivato a partire dall’altro. Chiaramente se
+ho un ciclo con all’interno una negazione potrei avere dei problemi (non sempre). Analiz-
+zando questo grafo posso capire subito se vi sono questi problemi. Si pu`o stratiﬁcare un
+programma guardando le regole tra le componenti connesse.
+I programmi che sono stratiﬁcati (non hanno cicli che coinvolgono la negazione) sono pi`u
+semplici e facili da risolvere, si valutano in maniera polinomiale.
+Vediamo pi`u formalmente la semantica dei programmi con disgiunzione e negazione.
+Teorema:
+Quando i programmi sono positivi esiste un unico modello minimale.
+Se, invece, `e presente anche la negazione o la disgiunzione la situazione cambia.
+92
+ANSWER SET PROGRAMMING
+9.4
+Disjunctive Logic Programming
+Nella testa possono essere presenti delle disgiunzioni, ad esempio:
+mother(P, S) | father(P, S) : →parent(P, S)
+(9.6)
+Un programma `e un insieme ﬁnito di regole e constraint (regole con testa vuota). Tipica-
+mente, se si utilizzano dei numeri si utilizza il built-in #int
+Una regola ha la forma:
+a1|...|an : →b1 , ..., bk, not(bk+1), ..., not(bm)
+(9.7)
+Si noti che se il corpo `e vero allora almeno un ai `e vero. La regola, tuttavia, pu`o essere
+usata per un solo elemento della testa e per dimostrare altri elementi `e necessario utilizzare
+altre regole. Ad esempio:
+Esistono due modelli minimali: uno in cui john `e interessato e uno in cui `e curioso...dunque,
+ottengo due di!erenti mondi e non ho motivo di pensare che siano entrambe vere.
+Nella logica classica dire che che da LP deriva a
+LP |= a
+(9.8)
+Signiﬁca che tale derivazione deve essere vera in tutti i modelli.
+93
+ANSWER SET PROGRAMMING
+Nelle logiche disgiuntive o con negazione le cose sono pi`u delicate.
+Tipicamente, si calcola un answer set e quando si va a ragionare sulla logica si possono
+utilizzare due diverse approcci:
+Brave-Reasoning: se la derivazione `e vera in almeno un modello. In altri termini,
+LP
+|=
+brave
+a
+se ⇔un Answer Set S : a ↔S
+(9.9)
+Cautios-Reasoning se la derivazione `e vera in tutti i modelli. In altri termini,
+LP
+|=
+cautios
+a
+se ↑Answer Set S, si ha che a ↔S e, chiaramente, ⇔S
+(9.10)
+Gli integrity constraint, come detto prima, sono delle regole senza testa utilizzate per scar-
+tare modelli che violano i constraint. Dato un programma con variabili, un programma
+ground istanziato `e quello in cui utilizziamo tutte le possibili sostituzioni partendo dall’u-
+niverso di Herbrand (tutte le costanti che appaiono nel programma), costruisco la base di
+Herbrand composta da tutti gli atomi ground che posso costruire facendo sostituzione con
+le variabili e, inﬁne, in tutte le regole utilizzo quegli atomi ground.
+Consideriamo il problema del vertex cover: voglio trovare i nodi del grafo che coprono
+tutti i rami del grafo. E’ un problema NP completo. Come si pu`o determinare un vertex
+cover minimale con la programmazione logica?
+inCover(x) | outCover(x) : →node(x)
+node(x) : →edge(x, )
+node(y) : →edge( , y)
+: →edge(x, y), not(inCover(x)), not(inCover(Y ))
+(9.11)
+Consideriamo il problema del dominating set: vogliamo un insieme di archi del grafo che
+copra tutti i nodi
+inDS(x) | outDS(x) : →node(x)
+dominated(x) : →edge(x, y), inDS(y)
+dominated(x) : →inDS(x)
+: →node(x), not(dominated(x))
+(9.12)
+94
+ANSWER SET PROGRAMMING
+Esistono dei vincoli con la tilde ⇐come il seguente:
+:⇐inDS(x), [1@1, x]
+(9.13)
+Essi sono chiamati weak constraint: meno forti degli strong constraint (quelli che ab-
+biamo visto ﬁnora che, se presenti, indicano una situazione che non si pu`o veriﬁcare).
+Tale vincolo indica che si preferirebbe che tutti i predicati inDS(x), ↑x (chiaramente il
+vincolo potrebbe sussistere per pi`u variabili ma nel nostro caso ve ne era solo una) non
+fossero presenti. Qualora fossero presenti, il modello ottiene una penalizzazione di 1. Si
+preferiscono i modelli Answer Set dove la somma dei pesi `e la pi`u piccola possibile. Si noti
+che @i indica il livello (presente solo nei sistemi pi`u moderni) della penalit`a di un vincolo
+debole: si scelgono gli Answer Set che minimizzano la somma dei pesi dei constraint violati
+di livello 1... a parit`a di valore si considera la somma dei constraint violati di livello 2 e
+cos`ı via. In ogni caso, gli Answer Set sono i dominating set di cardinalit`a minima.
+La complessit`a di questi problemi `e al massimo NP.
+9.5
+Semantica per la Disjunctive Logic Programming
+Per i programmi positivi, un Answer Set per un programma `e un modello minimale del
+programma. Per i programmi positivi, vi `e la stessa deﬁnizione come nella logica classica.
+Se `e presente anche la negazione le cose diventano pi`u complicate.
+Data una interpretazione I, la Riduzione di un programma P, `e il programma positivo
+P I ottenuto da P cancellando:
+Le regole con un letterale negativo falso per I;
+I letterali negativi dai corpi delle regole rimanenti.
+Un Answer Set di un programma P `e una interpretazione I tale che I `e un modello
+minimale di P I. Gli Answer Set sono chiamati anche Modelli Stabili.
+Consideriamo un esempio:
+a : →d, not(b)
+b : →not(d)
+d.
+(9.14)
+Consideriamo l’interpretazione I = {a, d}. Siccome b `e falso per I posso eliminare il
+letterale negativo not(b) che `e vero per I (utilizzando la seconda clausola della precedente
+deﬁnizione).
+Siccome d `e vero per I posso eliminare la seconda regola.
+Otteniamo il
+seguente programma positivo:
+a : →d
+d.
+(9.15)
+95
+ANSWER SET PROGRAMMING
+Dunque, otteniamo proprio I = {a, d} che `e un Answer Set.
+9.5.1
+Alcuni Teoremi per la DLP
+Si noti che un Answer Set `e sempre un modello minimale ma, in presenza di negazione,
+non vale il viceversa.
+Teorema:
+Un modello di Datalog positivo senza disgiunzione ha sempre un unico modello minimale.
+Teorema:
+Se S `e un Answer Set di P allora i fatti di P devono essere inclusi in S.
+Teorema:
+Se l’insieme dei fatti `e un Answer Set per un programma P, allora `e l’unico Answer Set
+per P.
+Teorema:
+Dato un programma P e una interpretazione I, un atomo a ↔I `e supportato in I se
+esiste una regola r ↔P tale che il corpo della regola r `e vero rispetto ad I e si ha che
+l’unico atomo vero rispetto ad I della testa di r `e a o, in altri termini, head(r) = a.
+Teorema:
+Dato un programma P e una interpretazione I, allora I `e un Answer Set per P solo se ogni
+atomo a ↔I `e supportato in I. Diventa una condizione necessaria e su”ciente se non vi
+sono cicli nel grafo delle dipendenze.
+96
+ANSWER SET PROGRAMMING
+9.6
+Path Hamiltoniano - Esercizio
+Consideriamo il seguente grafo:
+Vogliamo costruire un path hamiltoniano che passa da tutti i nodi esattamente una volta.
+Naturalmente, abbiamo un nodo start(i). Possiamo costruire il seguente programma:
+inP ath(x, y) | outP ath(x, y) : →arc(x, y)
+: →inP ath(x, y), inP ath(x, z), y <> z
+: →inP ath(y, x), inP ath(z, x), y <> z
+reach(x) : →start(x)
+: →node(x), not(reach(x))
+: →start(x), inP ath(y, x)
+(9.16)
+9.7
+Aggregate Function
+Come abbiamo visto in precedenza, in SQL `e di!cile fare ricorsione mentre `e piuttosto
+semplice farla utilizzando la DLP. Nel caso di addizioni e aggregazioni, invece, `e pi`u
+semplice implementarle in SQL che con la DLP. In ogni caso, nei sistemi di ASP sono
+state aggiunte tali funzioni di aggregazione.
+Supponiamo di avere una base di dati dove vi `e un predicato impiegato che ha varie
+informazioni, ovvero emp(EmpId, Sex, Skill, Salary). Se scriviamo:
+{V ariabili :
+CongiunzioneDiAtomi}
+(9.17)
+Ad esempio, deﬁnendo:
+{EmpId :
+emp(EmpId, Sex, Skill, Salary)}
+(9.18)
+97
+ANSWER SET PROGRAMMING
+Ottengo l’insieme degli id di tutti gli impiegati (Se piuttosto che Sex avessi metto male
+avrei ottenuto l’insieme degli id di tutti gli impiegati maschili). A questo punto, posso
+fare aggregazione utilizzando una funzione f:
+f{EmpId :
+emp(EmpId, Sex, Skill, Salary)}
+(9.19)
+Dove f `e un nome di funzione tra {#count, #sum, #times, #min, #max}. Ad
+esempio, potrei calcolare {y : inP ath(x, y)}. Oppure potrei deﬁnire dei vincoli come il
+seguente:
+5 < #count{EmpId : emp(EmpId, male, Skill, Salary)} ↑10
+(9.20)
+Si noti che si tratta di insiemi matematici, quindi non vi sono duplicati.
+Siccome non vi sono duplicati a volte le cose sono pi`u complicate. Consideriamo di avere
+le seguenti ground instances.
+Se voglio calcolare la somma dei salari, posso scrivere:
+sum(S) : →S = #sum{Y : emp(Id, , , Y )}
+(9.21)
+Tuttavia otterremo una somma pari a 4500 piuttosto che 5500 poich´e uno dei due 1000
+viene ignorato (essendo un duplicato). Per risolvere tale problema potrei incorporare anche
+l’Id in modo da non sopprimere il valore duplicato:
+sum(S) : →S = #sum{Y, Id : emp(Id, , , Y )}
+(9.22)
+La semantica in presenza di aggregati `e una estensione di quella base.
+Dato un insieme I che voglio veriﬁcare sia un Answer Set, vado a costruire il programma
+ridotto:
+Eliminando tutte le regole dove `e presente un letterale negativo falso oppure un
+letterale aggregato falso;
+Eliminando tutti i letterali aggregati o negativi dalle regole rimanenti.
+Se la mia interpretazione `e un modello minimale di questo programma ridotto, allora essa
+`e un Answer Set.
+98

@@ -1,0 +1,70 @@
+ZOLA
+by Mark Steere
+INTRODUCTION
+Zola is a two player game played on a 6x6 (or 8x8...) checkerboard initially filled with
+a checkered pattern of red and blue checkers as shown in Figure 1.
+The two players, Red and Blue, take turns moving their own checkers, one checker per
+turn, starting with Red.  If a player has a move available, he must make one.  If he has 
+no moves available, he must sit the game out and wait until he does have a move 
+available.  At least one of the two players will always have a move available.
+Draws cannot occur in Zola.  Mark Steere designed Zola in February, 2021.
+MOVE TYPES
+There are two types of moves in Zola: non-capturing and capturing.
+NON-CAPTURING MOVES
+The non-capturing move is a king-like move to an adjacent (horizontally, vertically, or
+diagonally), unoccupied square.  A non-capturing move must increase the straight line
+distance to the center point of the board*.  See Figure 2.
+CAPTURING MOVES
+The capturing move is a queen-like move along a straight (horizontal, vertical or
+diagonal) sequence of zero or more unoccupied squares terminating with an enemy
+occupied square.  The enemy checker is removed and replaced with the capturing
+checker.  A capturing move must maintain or decrease the straight line distance to the
+center point of the board.  See Figure 3.
+OBJECT OF THE GAME
+To win you must capture all enemy checkers.
+AUTHOR’S NOTE
+Feel free to publish this rule sheet and to program the game of Zola.  No licensing fee 
+or royalties are expected.  However, please don’t change the name or the rules, and 
+please attribute the game to me, Mark Steere.  My other games can be found at 
+marksteeregames.com.
+Figure 1 - Initial Setup.
+Figure 2 - Non-Capturing.
+Red has only three 
+available moves.  Each
+move is non-capturing
+and moves his checker to 
+an adjacent square which
+is further from the center
+of the board.
+Blue has only two 
+available moves.  Both
+moves are capturing.  
+Move A moves his 
+checker to a square 
+equally distant from the
+center of the board.  
+Move B moves his 
+checker to a square 
+closer to the center.
+Copyright (c) 2021 by Mark Steere
+Level 3
+Level 2
+Level 1
+Level 6
+Level 5
+Level 4
+*DISTANCE FROM CENTER
+There are 6 “levels” of distance from center.  All of the 
+highlighted squares within each level are equally distant from
+the center.
+Example 1: You can make a non-capturing, king’s move from 
+a square in level 2 to an unoccupied square in level 3, 4, or 5.
+Example 2: You can make a capturing queen’s move from a
+square in level 4 to another square in level 4 (assuming a
+straight path from one square to the other that isn’t blocked 
+by intervening checkers).
+Example 3: You can make a capturing queen’s move from 
+level 6 to level 1. 
+Figure 3 - Capturing.
+A
+B

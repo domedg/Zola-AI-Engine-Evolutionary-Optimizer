@@ -12,7 +12,7 @@ from ZolaGameS import ZolaGame
 import playerAdvanced as ai
 
 # Configurazioni Training
-GENERATIONS = 20
+GENERATIONS = 30
 POPULATION_SIZE = 10
 TIMEOUT_PER_MOVE = 1 # Usiamo 1 secondo per mossa per velocizzare (o 0.5)
 
@@ -230,6 +230,15 @@ def run_training():
                     "best_weights": ranked[0][1],
                     "score": ranked[0][0]
                 }, f, indent=4)
+                
+            # Salva storico per la Dashboard (CSV)
+            csv_file = os.path.join(os.path.dirname(__file__), '../logs/training_history.csv')
+            file_exists = os.path.exists(csv_file)
+            with open(csv_file, 'a') as f:
+                if not file_exists:
+                    f.write("Generation,Score,Material_First,Material_Second,Clustering_First,Clustering_Second\n")
+                best_w = ranked[0][1]
+                f.write(f"{gen + 1},{ranked[0][0]},{best_w[33]},{best_w[67]},{best_w[31]},{best_w[65]}\n")
 
             
         print("\nTraining Completato o Fermato! I pesi migliori sono stati salvati in 'logs/best_weights.json'")

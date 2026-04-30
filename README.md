@@ -1,5 +1,7 @@
 # Zola AI Engine: Evolutionary Optimizer
 
+> Developed with ❤️ by @domedg and @Antonio-Rocchia
+
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue?style=flat-square&logo=python)
 ![AI](https://img.shields.io/badge/AI-NegaMax%20%2B%20AlphaBeta-red?style=flat-square)
 ![Genetic Algorithm](https://img.shields.io/badge/Optimization-Genetic%20Algorithm-brightgreen?style=flat-square)
@@ -142,9 +144,3 @@ python scripts/train_zola.py
 ## 🔒 Competitive Integrity Note
 *Some proprietary heuristics (e.g., precise bitwise masks) and the final trained weights (`best_weights.json`) have been obfuscated or added to `.gitignore` to maintain competitive integrity in academic tournaments. The architecture, however, remains fully functional for demonstration purposes.*
 
----
-
-## Authors
-
-* **[Domenico Del Giudice]** - *Co-creator* - [@domedg](https://github.com/domedg)
-* **[Antonio Rocchia]** - *Co-creator* - [@Antonio-Rocchia](https://github.com/Antonio-Rocchia)

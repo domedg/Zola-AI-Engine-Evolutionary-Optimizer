@@ -141,3 +141,10 @@ python scripts/train_zola.py
 
 ## 🔒 Competitive Integrity Note
 *Some proprietary heuristics (e.g., precise bitwise masks) and the final trained weights (`best_weights.json`) have been obfuscated or added to `.gitignore` to maintain competitive integrity in academic tournaments. The architecture, however, remains fully functional for demonstration purposes.*
+
+---
+
+## Authors
+
+* **[Domenico Del Giudice]** - *Co-creator* - [@domedg](https://github.com/domedg)
+* **[Antonio Rocchia]** - *Co-creator* - [@Antonio-Rocchia](https://github.com/Antonio-Rocchia)

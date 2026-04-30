@@ -9,6 +9,8 @@ import time
 # #######################
 import playerExampleAlpha as playerBmodule
 import playerAdvanced as playerRmodule
+import playerGPU as playerGPUmodule
+import player130params as player130module
 # #######################
 
 class Game:
@@ -289,12 +291,12 @@ class ZolaGUI:
     LAST_FROM_HIGHLIGHT = "#FFE082"
     LAST_TO_HIGHLIGHT = "#FFCC80"
 
-    def __init__(self, game, player_types, time_out=3, player_names=None, advanced_team="Both"):
+    def __init__(self, game, player_types, time_out=3, player_names=None, ai_types=None):
         self.game = game
         self.player_types = player_types
         self.time_out = time_out
         self.player_names = player_names or {"Red": "Rosso", "Blue": "Blu"}
-        self.advanced_team = advanced_team
+        self.ai_types = ai_types or {"Red": "Advanced", "Blue": "Alpha"}
 
         self.state_history = [game.initial]
         self.current_index = 0
@@ -651,7 +653,12 @@ class ZolaGUI:
         turn_start = time.perf_counter()
 
         if self.player_types[current_player] == "ai":
-            if self.advanced_team in [current_player, "Both"]:
+            ai_type = self.ai_types.get(current_player, "Alpha")
+            if ai_type == "Gpu":
+                strategy = playerGPUmodule.playerStrategy
+            elif ai_type == "130params":
+                strategy = player130module.playerStrategy
+            elif ai_type == "Advanced":
                 strategy = playerRmodule.playerStrategy
             else:
                 strategy = playerBmodule.playerStrategy
@@ -844,10 +851,32 @@ def main():
     
     first_player = simpledialog.askstring("Primo Turno", "Chi inizia per primo? (Red o Blue):", initialvalue="Red", parent=temp_root)
     first_player = (first_player or "Red").capitalize()
-    if first_player not in ["Red", "Blue"]: first_player = "Red"
-        
-    advanced_team = simpledialog.askstring("Motore Advanced", "Quale colore usa il nostro motore Advanced? (Red, Blue, Both, None):", initialvalue="Red", parent=temp_root)
-    advanced_team = (advanced_team or "Red").capitalize()
+    ai_types = {"Red": "Advanced", "Blue": "Alpha"}
+    if player_types["Red"] == "ai":
+        ai_red = simpledialog.askstring("AI Rosso", "Motore AI Rosso (Gpu / 130params / Advanced / Alpha):", initialvalue="130params", parent=temp_root)
+        ai_types["Red"] = (ai_red or "130params").lower()
+    if player_types["Blue"] == "ai":
+        ai_blue = simpledialog.askstring("AI Blu", "Motore AI Blu (Gpu / 130params / Advanced / Alpha):", initialvalue="Alpha", parent=temp_root)
+        ai_types["Blue"] = (ai_blue or "Alpha").lower()
+
+    # Normalizzazione per la logica interna (alcune parti usano capitalized, noi usiamo lower per i tipi)
+    if ai_types["Red"] == "Gpu": ai_types["Red"] = "Gpu" # Già capitalized nel prompt? No, usiamo lower internamente per sicurezza o matchiamo prompt
+    # In realtà nel prompt ho messo Gpu/130params... usiamo match esatto o lower()
+    ai_types["Red"] = ai_types["Red"].lower()
+    ai_types["Blue"] = ai_types["Blue"].lower()
+    # Ma wait, play_turn aspetta "Gpu" e "Advanced"?
+    # Vediamo: if ai_type == "Gpu": ... elif ai_type == "Advanced": ...
+    # Quindi usiamo case-insensitive match o fissiamo uno.
+    # Usiamo:
+    def normalize_ai(s):
+        s = s.lower()
+        if "gpu" in s: return "Gpu"
+        if "130" in s: return "130params"
+        if "adv" in s: return "Advanced"
+        return "Alpha"
+    
+    ai_types["Red"] = normalize_ai(ai_types["Red"])
+    ai_types["Blue"] = normalize_ai(ai_types["Blue"])
 
     temp_root.destroy()
 
@@ -857,7 +886,7 @@ def main():
         player_types,
         time_out=timeout,
         player_names={"Red": red_name.strip(), "Blue": blue_name.strip()},
-        advanced_team=advanced_team
+        ai_types=ai_types
     )
     gui.run_game_loop()
 
